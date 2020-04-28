@@ -1,0 +1,20 @@
+.assign1 {
+    border: 2px solid black;
+    margin: auto;
+    width: 75%;
+    text-align: left;
+}
+
+.assign1 h1 {
+    text-align: center;
+    background-color: olive;
+}
+
+.assign1 .UserOutput {
+    padding: 10px;
+    background-color: olive;
+    width: 50%;
+    margin: auto;
+    color: #fff;
+    box-shadow: 0px 0px 5px 3px black;
+}

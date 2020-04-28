@@ -1,0 +1,11 @@
+.assign2 {
+    border: 2px solid black;
+    margin: auto;
+    width: 75%;
+    text-align: left;
+}
+
+.assign2 h1 {
+    text-align: center;
+    background-color: olive;
+}
