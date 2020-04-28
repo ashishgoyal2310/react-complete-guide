@@ -1,14 +1,43 @@
 import React, { Component } from 'react';
 import './Person.css'
+import styled from 'styled-components'
+
+const StyledPersonCardDiv = styled.div`
+    width: 50%;
+    border: 1px solid #eee;
+    box-shadow: 0px 2px 3px #ccc;
+    margin: 16px auto;
+    padding: 16px;
+
+    @media (min-width: 500px) {
+        width: 450px;
+    }
+`
 
 export const Person = (props) => {
     return (
-        <div className="person-card">
+        // <div className="person-card">
+        <StyledPersonCardDiv>
             <p className="pointer" onClick={props.onClick}>Hi { props.name }!! Your age is { props.age }</p>
             <input type="text" onChange={props.onChange} value={props.name}/>
-        </div>
+        </StyledPersonCardDiv>
+        // </div>
     )
 }
+
+
+const StyledButton = styled.button`
+    border: 1px solid blue;
+    padding: 5px;
+    margin: 5px;
+    background-color: ${props => {console.log(props); return props.isShown ? 'rgb(155, 0, 0)' : 'rgb(0, 155, 0)'}};
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${props => props.isShown ? 'rgb(255, 0, 0)' : 'rgb(0, 255, 0)'};
+    }
+`
 
 export class Persons extends Component {
     state = {
@@ -38,15 +67,6 @@ export class Persons extends Component {
     }
 
     render() {
-        const btnStyle = {
-            border: '1px solid blue',
-            boxShadow: '0px 0px 3px 1px blue',
-            padding: '5px',
-            margin: '5px',
-            backgroundColor: '#fff',
-            cursor: 'pointer',
-        }
-
         let persons = null;
         if (this.state.showPersons) {
             persons = (
@@ -64,10 +84,9 @@ export class Persons extends Component {
 
         return (
             <React.Fragment>
-                <button
-                    style={btnStyle}
+                <StyledButton isShown={this.state.showPersons}
                     onClick={this.togglePersonHandler}>Toggle Person
-                </button>
+                </StyledButton>
                 {persons}
             </React.Fragment>
         );

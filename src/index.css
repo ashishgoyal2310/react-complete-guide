@@ -11,6 +11,11 @@ body {
   border: 1px solid goldenrod;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
