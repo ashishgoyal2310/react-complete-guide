@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import ErrorBoundary from './ErrorBoundary'
 import classes from './Person.module.css'
 
 
 export const Person = (props) => {
+    const rnd = Math.random()
+    if (rnd > 0.7) {
+        throw new Error('Something went wrong')
+    }
+
     return (
         <div className={classes.personCard}>
             <p className="pointer" onClick={props.onClick}>Hi { props.name }!! Your age is { props.age }</p>
@@ -45,12 +51,15 @@ export class Persons extends Component {
         if (this.state.showPersons) {
             persons = (
                 <div>
-                    {this.state.persons.map((personDct, index) =>
-                        <Person key={personDct.id}
-                            name={personDct.name} age={personDct.age}
-                            onClick={() => this.deletePersonHandler(index)}
-                            onChange={(event) => this.inputChangeHandler(event, personDct.id)}
-                        />)
+                    {this.state.persons.map((personDct, index) => {
+                        return <ErrorBoundary key={personDct.id}>
+                                <Person
+                                    name={personDct.name}
+                                    age={personDct.age}
+                                    onClick={() => this.deletePersonHandler(index)}
+                                    onChange={(event) => this.inputChangeHandler(event, personDct.id)}/>
+                            </ErrorBoundary>
+                        })
                     }
                 </div>
             )
@@ -59,7 +68,7 @@ export class Persons extends Component {
 
         return (
             <React.Fragment>
-                <button class={buttonToggleCss.join(' ')} isShown={this.state.showPersons}
+                <button className={buttonToggleCss.join(' ')}
                     onClick={this.togglePersonHandler}>Toggle Person
                 </button>
                 {persons}
