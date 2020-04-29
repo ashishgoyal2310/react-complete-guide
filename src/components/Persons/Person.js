@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classes from './Person.module.css'
 
 
 export const Person = (props) => {
-    const rnd = Math.random()
-    if (rnd > 0.7) {
-        throw new Error('Something went wrong')
-    }
+    // const rnd = Math.random()
+    // if (rnd > 0.7) {
+    //     throw new Error('Something went wrong')
+    // }
 
     return (
         <div className={classes.personCard}>

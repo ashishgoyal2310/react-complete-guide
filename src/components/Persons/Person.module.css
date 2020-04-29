@@ -25,9 +25,16 @@
     background-color: rgb(0, 255, 0);
 }
 
-.buttonToggle.red {
+.buttonToggle.btnred {
     background-color: rgb(155, 0, 0);
 }
-.buttonToggle.red:hover {
+.buttonToggle.btnred:hover {
     background-color: rgb(255, 0, 0);
+}
+
+.txtred {
+    color: rgb(155, 0, 0);
+}
+.txtred.txtbold {
+    font-weight: bold;
 }
