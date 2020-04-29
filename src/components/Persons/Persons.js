@@ -1,24 +1,9 @@
 import React, { Component } from 'react';
-import ErrorBoundary from './ErrorBoundary'
+import Person from './Person'
+import ErrorBoundary from '../ErrorBoundary'
 import classes from './Person.module.css'
 
-
-export const Person = (props) => {
-    const rnd = Math.random()
-    if (rnd > 0.7) {
-        throw new Error('Something went wrong')
-    }
-
-    return (
-        <div className={classes.personCard}>
-            <p className="pointer" onClick={props.onClick}>Hi { props.name }!! Your age is { props.age }</p>
-            <input type="text" onChange={props.onChange} value={props.name}/>
-        </div>
-    )
-}
-
-
-export class Persons extends Component {
+class Persons extends Component {
     state = {
         persons: [
             { id: '1', name: 'Ashu', age: '25'},
@@ -76,3 +61,5 @@ export class Persons extends Component {
         );
     }
 }
+
+export default Persons;
