@@ -6,6 +6,8 @@ import PersonApp from '../components/Persons/Cockpit'
 // import Assign2 from '../components/Assign2'
 
 function App() {
+  console.log('[App.js] ...........rendering');
+
   return (
     <div className="App">
       <h1>Hello World!!</h1>
