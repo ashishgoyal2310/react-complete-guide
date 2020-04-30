@@ -1,8 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import classes from './Person.module.css'
 import Persons from './Persons'
 
 const Cockpit = (props) => {
+
+    useEffect(() => {
+        console.log('[Cockpit.js  ] ..useEffect as componentDidMount (pass empty array)');
+        setTimeout(() => {
+            alert('useEffect as componentDidMount (pass empty array)');
+        }, 1000);
+    }, []);
+
+    useEffect(() => {
+        console.log('[Cockpit.js  ] ..useEffect as componentDidUpdate');
+    }, [props.persons]);
+
     const paraMgmtCss = []
     if (props.persons.length <= 2) {
         paraMgmtCss.push(classes.txtred)
@@ -27,7 +39,6 @@ const Cockpit = (props) => {
     );
 }
 
-
 class PersonApp extends Component {
     state = {
         persons: [
@@ -36,6 +47,29 @@ class PersonApp extends Component {
             { id: '3', name: 'Neha', age: '26'},
         ],
         showPersons: false,
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[PersonApp.js] .....getDerivedStateFromProps')
+        return state;
+    }
+
+    componentDidMount() {
+        console.log('[PersonApp.js] .....componentDidMount')
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[PersonApp.js] .....shouldComponentUpdate');
+        return true;
+    }
+
+    getSnapshotBeforeUpdate(prevProps, preState) {
+        console.log('[PersonApp.js] .....getSnapshotBeforeUpdate');
+        return null;
+    }
+
+    componentDidUpdate(prevProps, preState) {
+        console.log('[PersonApp.js] .....componentDidUpdate')
     }
 
     inputChangeHandler = (event, id) => {
@@ -56,17 +90,23 @@ class PersonApp extends Component {
     }
 
     render() {
+        console.log('[PersonApp.js] ........rendering');
+
+        let persons = null;
+        if (this.state.showPersons) {
+            persons = <Persons
+                    persons={this.state.persons}
+                    onClick={this.deletePersonHandler}
+                    onChange={this.inputChangeHandler} />
+        }
+
         return (
             <React.Fragment>
                 <Cockpit
                     persons={this.state.persons}
                     showPersons={this.state.showPersons}
                     onClick={this.togglePersonHandler} />
-                <Persons
-                    persons={this.state.persons}
-                    showPersons={this.state.showPersons}
-                    onClick={this.deletePersonHandler}
-                    onChange={this.inputChangeHandler} />
+                {persons}
             </React.Fragment>
         );
     }
