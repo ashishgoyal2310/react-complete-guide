@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Person.module.css'
 
 
-export const Person = (props) => {
+const Person = (props) =>  {
     // const rnd = Math.random()
     // if (rnd > 0.7) {
     //     throw new Error('Something went wrong')
     // }
+
+    useEffect(() => {
+        return () => {
+            console.log('[Person.js   ] ..useEffect as componentDidUnMount (pass empty array)')
+        }
+    }, []);
+
+    console.log('[Person.js   ] ..rendering');
 
     return (
         <div className={classes.personCard}>
