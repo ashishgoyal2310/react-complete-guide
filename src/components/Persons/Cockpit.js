@@ -7,13 +7,19 @@ const Cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js  ] ..useEffect as componentDidMount (pass empty array)');
         setTimeout(() => {
-            alert('useEffect as componentDidMount (pass empty array)');
+            alert('[Cockpit.js  ] as componentDidMount.');
         }, 1000);
     }, []);
 
     useEffect(() => {
         console.log('[Cockpit.js  ] ..useEffect as componentDidUpdate');
     }, [props.persons]);
+
+    useEffect(() => {
+        return () => {
+            console.log('[Cockpit.js  ] ..useEffect as componentWillUnmount (pass empty array use return method)')
+        }
+    }, []);
 
     const paraMgmtCss = []
     if (props.persons.length <= 2) {
@@ -82,6 +88,10 @@ class PersonApp extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         console.log('[PersonApp.js] .....componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('[PersonApp.js] .....componentWillUnmount');
     }
 
     inputChangeHandler = (event, id) => {
