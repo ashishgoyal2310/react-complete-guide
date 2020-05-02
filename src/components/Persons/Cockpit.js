@@ -49,27 +49,17 @@ class PersonApp extends Component {
         showPersons: false,
     }
 
-    static getDerivedStateFromProps(props, state) {
-        console.log('[PersonApp.js] .....getDerivedStateFromProps')
-        return state;
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('[PersonApp.js] .....getDerivedStateFromProps')
+    //     return state;
+    // }
+
+    componentWillMount() {
+        console.log('[PersonApp.js] .....componentWillMount')
     }
 
     componentDidMount() {
         console.log('[PersonApp.js] .....componentDidMount')
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[PersonApp.js] .....shouldComponentUpdate');
-        return true;
-    }
-
-    getSnapshotBeforeUpdate(prevProps, preState) {
-        console.log('[PersonApp.js] .....getSnapshotBeforeUpdate');
-        return null;
-    }
-
-    componentDidUpdate(prevProps, preState) {
-        console.log('[PersonApp.js] .....componentDidUpdate')
     }
 
     inputChangeHandler = (event, id) => {
@@ -92,21 +82,19 @@ class PersonApp extends Component {
     render() {
         console.log('[PersonApp.js] ........rendering');
 
-        let persons = null;
-        if (this.state.showPersons) {
-            persons = <Persons
-                    persons={this.state.persons}
-                    onClick={this.deletePersonHandler}
-                    onChange={this.inputChangeHandler} />
-        }
-
         return (
             <React.Fragment>
                 <Cockpit
                     persons={this.state.persons}
                     showPersons={this.state.showPersons}
                     onClick={this.togglePersonHandler} />
-                {persons}
+                {
+                    this.state.showPersons ?
+                    <Persons
+                        persons={this.state.persons}
+                        onClick={this.deletePersonHandler}
+                        onChange={this.inputChangeHandler} /> : null
+                }
             </React.Fragment>
         );
     }
