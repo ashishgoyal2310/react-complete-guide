@@ -7,13 +7,19 @@ const Cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js  ] ..useEffect as componentDidMount (pass empty array)');
         setTimeout(() => {
-            alert('useEffect as componentDidMount (pass empty array)');
+            alert('[Cockpit.js  ] as componentDidMount.');
         }, 1000);
     }, []);
 
     useEffect(() => {
         console.log('[Cockpit.js  ] ..useEffect as componentDidUpdate');
     }, [props.persons]);
+
+    useEffect(() => {
+        return () => {
+            console.log('[Cockpit.js  ] ..useEffect as componentWillUnmount (pass empty array use return method)')
+        }
+    }, []);
 
     const paraMgmtCss = []
     if (props.persons.length <= 2) {
@@ -49,13 +55,21 @@ class PersonApp extends Component {
         showPersons: false,
     }
 
+    // componentWillMount() {
+    //     console.log('[PersonApp.js] .....componentWillMount');
+    // }
+
+    componentDidMount() {
+        console.log('[PersonApp.js] .....componentDidMount');
+    }
+
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('[PersonApp.js] .....componentWillReceiveProps', nextProps);
+    // }
+
     static getDerivedStateFromProps(props, state) {
         console.log('[PersonApp.js] .....getDerivedStateFromProps')
         return state;
-    }
-
-    componentDidMount() {
-        console.log('[PersonApp.js] .....componentDidMount')
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -63,13 +77,21 @@ class PersonApp extends Component {
         return true;
     }
 
-    getSnapshotBeforeUpdate(prevProps, preState) {
+    // componentWillUpdate(nextProps, nextState) {
+    //     console.log('[PersonApp.js] .....componentWillUpdate');
+    // }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[PersonApp.js] .....getSnapshotBeforeUpdate');
         return null;
     }
 
-    componentDidUpdate(prevProps, preState) {
-        console.log('[PersonApp.js] .....componentDidUpdate')
+    componentDidUpdate(prevProps, prevState) {
+        console.log('[PersonApp.js] .....componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('[PersonApp.js] .....componentWillUnmount');
     }
 
     inputChangeHandler = (event, id) => {
@@ -92,21 +114,19 @@ class PersonApp extends Component {
     render() {
         console.log('[PersonApp.js] ........rendering');
 
-        let persons = null;
-        if (this.state.showPersons) {
-            persons = <Persons
-                    persons={this.state.persons}
-                    onClick={this.deletePersonHandler}
-                    onChange={this.inputChangeHandler} />
-        }
-
         return (
             <React.Fragment>
                 <Cockpit
                     persons={this.state.persons}
                     showPersons={this.state.showPersons}
                     onClick={this.togglePersonHandler} />
-                {persons}
+                {
+                    this.state.showPersons ?
+                    <Persons
+                        persons={this.state.persons}
+                        onClick={this.deletePersonHandler}
+                        onChange={this.inputChangeHandler} /> : null
+                }
             </React.Fragment>
         );
     }

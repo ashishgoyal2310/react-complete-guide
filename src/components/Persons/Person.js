@@ -10,7 +10,7 @@ const Person = (props) =>  {
 
     useEffect(() => {
         return () => {
-            console.log('[Person.js   ] ..useEffect as componentDidUnMount (pass empty array)')
+            console.log('[Person.js   ] ..useEffect as componentWillUnmount (pass empty array)')
         }
     }, []);
 
