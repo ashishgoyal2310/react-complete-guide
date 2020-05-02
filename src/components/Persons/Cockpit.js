@@ -49,21 +49,21 @@ class PersonApp extends Component {
         showPersons: false,
     }
 
-    // static getDerivedStateFromProps(props, state) {
-    //     console.log('[PersonApp.js] .....getDerivedStateFromProps')
-    //     return state;
+    // componentWillMount() {
+    //     console.log('[PersonApp.js] .....componentWillMount');
     // }
-
-    componentWillMount() {
-        console.log('[PersonApp.js] .....componentWillMount');
-    }
 
     componentDidMount() {
         console.log('[PersonApp.js] .....componentDidMount');
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('[PersonApp.js] .....componentWillReceiveProps', nextProps);
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('[PersonApp.js] .....componentWillReceiveProps', nextProps);
+    // }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[PersonApp.js] .....getDerivedStateFromProps')
+        return state;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -71,8 +71,13 @@ class PersonApp extends Component {
         return true;
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        console.log('[PersonApp.js] .....componentWillUpdate');
+    // componentWillUpdate(nextProps, nextState) {
+    //     console.log('[PersonApp.js] .....componentWillUpdate');
+    // }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[PersonApp.js] .....getSnapshotBeforeUpdate');
+        return null;
     }
 
     componentDidUpdate(prevProps, prevState) {
