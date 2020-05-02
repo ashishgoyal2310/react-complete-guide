@@ -55,11 +55,28 @@ class PersonApp extends Component {
     // }
 
     componentWillMount() {
-        console.log('[PersonApp.js] .....componentWillMount')
+        console.log('[PersonApp.js] .....componentWillMount');
     }
 
     componentDidMount() {
-        console.log('[PersonApp.js] .....componentDidMount')
+        console.log('[PersonApp.js] .....componentDidMount');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('[PersonApp.js] .....componentWillReceiveProps', nextProps);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[PersonApp.js] .....shouldComponentUpdate');
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('[PersonApp.js] .....componentWillUpdate');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('[PersonApp.js] .....componentDidUpdate');
     }
 
     inputChangeHandler = (event, id) => {
