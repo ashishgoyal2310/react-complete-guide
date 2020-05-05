@@ -8,12 +8,12 @@ const Burger = (props) => {
                     .map((ingreType) => {
                         return Array(props.ingredients[ingreType]).fill(ingreType)
                             .map((ingreType, index) => <BurgerIngredients key={ingreType+index} type={ ingreType } /> )
-                    }).reduce((current, nextEle) => [...current, ...nextEle]);
+                    }).reduce((currentAry, nextEle) => [...currentAry, ...nextEle]);
 
     return (
         <div className={ classes.Burger }>
             <BurgerIngredients type='burger-top' />
-            { burgerIngredients.length ? burgerIngredients : <span>Please select fillings.</span> }
+            { burgerIngredients.length ? burgerIngredients : <span>Please start adding ingredients.</span> }
             <BurgerIngredients type='burger-bottom' />
         </div>
     );
