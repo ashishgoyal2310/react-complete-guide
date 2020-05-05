@@ -6,13 +6,11 @@ const BurgerIngredients = (props) => {
     switch ( props.type ) {
         case 'burger-top':
             Ingredients = (
-                <div className={ classes.BurgerTop }>
-                    <div>Burger Top</div>
-                </div>
+                <div className={ classes.BurgerTop }></div>
             );
             break;
         case 'burger-bottom':
-            Ingredients = <div className={ classes.BurgerBottom }>Burger Bottom</div>;
+            Ingredients = <div className={ classes.BurgerBottom }></div>;
             break;
         case 'tikki':
             Ingredients = <div className={ classes.Tikki }>Tikki</div>;
