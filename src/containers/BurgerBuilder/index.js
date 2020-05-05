@@ -17,7 +17,8 @@ class BurgerBuilder extends Component {
             cheese: 0,
             tikki: 0
         },
-        totalPrice: 3
+        totalPrice: 3,
+        isPurchasable: false,
     }
 
     addIngredientsHandler = (type) => {
@@ -30,6 +31,7 @@ class BurgerBuilder extends Component {
         const updatedTotalPrice = currentTotalPrice + ingredientCost;
 
         this.setState({ingredients: updatedIngredients, totalPrice: updatedTotalPrice});
+        this.isPurchasableHandler();
     }
 
     removeIngredientsHandler = (type) => {
@@ -45,12 +47,23 @@ class BurgerBuilder extends Component {
         const updatedTotalPrice = currentTotalPrice - ingredientCost;
 
         this.setState({ingredients: updatedIngredients, totalPrice: updatedTotalPrice});
+        this.isPurchasableHandler();
+    }
+
+    isPurchasableHandler = () => {
+        this.setState((prevState, props) => {
+            const updatedIngredients = { ...prevState.ingredients };
+            const sum = Object.keys(updatedIngredients)
+                .map(igKey => updatedIngredients[igKey])
+                .reduce((updatedCnt, nxtEle) => { return updatedCnt + nxtEle }, 0)
+            return { isPurchasable: sum > 0 };
+        });
     }
 
     render() {
         const btnDisables = { ...this.state.ingredients };
         for (let key in btnDisables) {
-            btnDisables[key] = btnDisables[key] === 0
+            btnDisables[key] = btnDisables[key] <= 0
         }
 
         return (
@@ -60,7 +73,8 @@ class BurgerBuilder extends Component {
                     btnDisables={btnDisables}
                     totalPrice={this.state.totalPrice}
                     addIngredients={this.addIngredientsHandler}
-                    removeIngredients={this.removeIngredientsHandler} />
+                    removeIngredients={this.removeIngredientsHandler}
+                    isPurchasable={this.state.isPurchasable} />
             </React.Fragment>
         );
     }
