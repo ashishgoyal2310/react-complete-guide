@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import PersonApp from '../components/Persons/Cockpit'
-import Layout from '../components/Layout'
+import Layout from './Layout'
 import BurgerBuilder from '../containers/BurgerBuilder'
 // import Assign1 from '../components/Assign1'
 // import Assign2 from '../components/Assign2'

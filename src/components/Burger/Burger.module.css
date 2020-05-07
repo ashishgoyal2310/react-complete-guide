@@ -1,8 +1,18 @@
 .Burger {
-    width: 75%;
+    width: 95%;
     margin: auto;
     height: 250px;
     overflow: auto;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    font-size: 0.6em;
+}
+
+@media (min-width: 500px) {
+    .Burger {
+        width: 75%;
+    }
+}
+
+.Burger > div {
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
