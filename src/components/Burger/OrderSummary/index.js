@@ -12,6 +12,7 @@ const OrderSummary = (props) => {
     return (
         <React.Fragment>
             <h3>Your Order</h3>
+            <p><strong>Total Cost: { props.totalPrice }</strong></p>
             <p>A delicius burger with the following ingredients:</p>
             <ul>
                 {ingredientsSummary}
