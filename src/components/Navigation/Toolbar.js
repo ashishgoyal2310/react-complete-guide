@@ -10,7 +10,6 @@ const Toolbar = (props) => {
                 <div></div>
                 <div></div>
                 <div></div>
-                <div></div>
             </div>
             <div className={classes.ToolbarLogo}><LogoImage /></div>
             <nav>

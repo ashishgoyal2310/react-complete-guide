@@ -88,12 +88,15 @@ class BurgerBuilder extends Component {
                 <Modal
                     show={this.state.showOrderSummaryModal}
                     hideOrderSummary={this.hideOrderSummaryModalHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
+                    <OrderSummary
+                        ingredients={this.state.ingredients}
+                        totalPrice={this.state.totalPrice.toFixed(2)}
+                        hideOrderSummary={this.hideOrderSummaryModalHandler} />
                 </Modal>
                 <Burger ingredients={ this.state.ingredients } />
                 <BuildControls
                     btnDisables={btnDisables}
-                    totalPrice={this.state.totalPrice}
+                    totalPrice={this.state.totalPrice.toFixed(2)}
                     addIngredients={this.addIngredientsHandler}
                     removeIngredients={this.removeIngredientsHandler}
                     showOrderSummary={this.showOrderSummaryModalHandler}
