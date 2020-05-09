@@ -5,8 +5,8 @@ const PostList = (props) => {
     const postCls = [classes.Card, classes.PostCard].join(' ')
     return (
         <div className={ postCls }>
-            <p>#1 Title</p>
-            <p>Description</p>
+            <p>#{ props.id } { props.title }</p>
+            <p>Author: <strong>{ props.author }</strong></p>
         </div>
     );
 }

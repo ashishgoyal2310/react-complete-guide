@@ -12,23 +12,23 @@ class Blog extends Component {
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.setState({
                     posts: response.data
-                })
-            })
+                });
+            });
     }
 
     render() {
+        const postsListing = this.state.posts.map(post => {
+            return (<PostList key={post.id} id={post.id} title={post.title} author={'Ashish'} />);
+        });
+
         return (
             <React.Fragment>
                 <section>
                     <h3>Post Listing</h3>
-                    <PostList />
-                    <PostList />
-                    <PostList />
-                    <PostList />
-                    <PostList />
+                    { postsListing }
                 </section>
                 <section>
                     <PostDetail />
