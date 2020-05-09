@@ -1,0 +1,28 @@
+.Card {
+    width: 80%;
+    margin: 5px auto;
+    border: 1px solid #aaaaaa;
+    box-shadow: 0px 2px 3px #aaaaaa;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.PostCard {
+    display: inline-block;
+    width: 250px;
+    margin: 5px;
+}
+
+.PostCard:hover {
+    background-color: #eee;
+}
+
+button.Danger {
+
+}
+
+.PostCreateForm > * {
+    display: block;
+    width: 100%;
+    margin: auto;
+}
