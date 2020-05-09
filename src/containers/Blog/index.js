@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import PostList from '../../components/FullPost/PostList'
 import PostDetail from '../../components/FullPost/PostDetail'
 import PostCreate from '../../components/FullPost/PostCreate'
 
 class Blog extends Component {
-    state = {  }
+    state = {
+        posts: []
+    }
+
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    posts: response.data
+                })
+            })
+    }
+
     render() {
         return (
             <React.Fragment>
