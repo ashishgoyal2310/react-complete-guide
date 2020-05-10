@@ -11,14 +11,11 @@
     display: inline-block;
     width: 250px;
     margin: 5px;
+    cursor: pointer;
 }
 
 .PostCard:hover {
     background-color: #eee;
-}
-
-button.Danger {
-
 }
 
 .PostCreateForm > * {
