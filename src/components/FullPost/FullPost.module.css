@@ -11,6 +11,7 @@
     display: inline-block;
     width: 250px;
     margin: 5px;
+    cursor: pointer;
 }
 
 .PostCard:hover {

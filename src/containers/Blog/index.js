@@ -6,7 +6,8 @@ import PostCreate from '../../components/FullPost/PostCreate'
 
 class Blog extends Component {
     state = {
-        posts: []
+        posts: [],
+        selectedPostid: null
     }
 
     componentDidMount() {
@@ -23,9 +24,20 @@ class Blog extends Component {
             });
     }
 
+    selectPostHandler = (postId) => {
+        this.setState({
+            selectedPostid: postId
+        })
+    }
+
     render() {
         const postsListing = this.state.posts.map(post => {
-            return (<PostList key={post.id} id={post.id} title={post.title} author={post.author} />);
+            return <PostList
+                        key={post.id}
+                        id={post.id}
+                        title={post.title}
+                        author={post.author}
+                        clicked={() => this.selectPostHandler(post.id)} />;
         });
 
         return (
@@ -35,7 +47,7 @@ class Blog extends Component {
                     { postsListing }
                 </section>
                 <section>
-                    <PostDetail />
+                    <PostDetail postId={this.state.selectedPostid} />
                 </section>
                 <section>
                     <PostCreate />
