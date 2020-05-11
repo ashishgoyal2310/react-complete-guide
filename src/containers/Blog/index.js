@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
+import axios from '../axiosInstance'
 import PostList from '../../components/FullPost/PostList'
 import PostDetail from '../../components/FullPost/PostDetail'
 import PostCreate from '../../components/FullPost/PostCreate'
@@ -7,13 +8,18 @@ import PostCreate from '../../components/FullPost/PostCreate'
 class Blog extends Component {
     state = {
         posts: [],
-        selectedPostid: null
+        selectedPostid: null,
+        error: false
     }
 
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        const rnd = Math.random();
+        // Randomize to use wrong url to check error section
+        let url = (rnd > 0.5) ? '/postsXXX' : '/posts';
+
+        axios.get(url)
             .then(response => {
-                // console.log(response.data);
+                console.log(response);
                 const posts = response.data.slice(0, 5);
                 const updatePosts = posts.map(post => {
                     return { ...post, author: 'Ashish Goyal'}
@@ -21,6 +27,9 @@ class Blog extends Component {
                 this.setState({
                     posts: updatePosts
                 });
+            })
+            .catch(response => {
+                this.setState({ error: true });
             });
     }
 
@@ -31,21 +40,26 @@ class Blog extends Component {
     }
 
     createPostHandler = (data) => {
-        axios.post('https://jsonplaceholder.typicode.com/posts', data)
+        axios.post('/posts', data)
             .then(response => {
                 console.log(response);
             });
     }
 
     render() {
-        const postsListing = this.state.posts.map(post => {
-            return <PostList
-                        key={post.id}
-                        id={post.id}
-                        title={post.title}
-                        author={post.author}
-                        clicked={() => this.selectPostHandler(post.id)} />;
-        });
+        let postsListing = <p>Loading...</p>;
+        if (this.state.error && !this.state.posts.length) {
+            postsListing = <p>Error while loading...</p>;
+        } else if (!!this.state.posts.length) {
+            postsListing = this.state.posts.map(post => {
+                return <PostList
+                            key={post.id}
+                            id={post.id}
+                            title={post.title}
+                            author={post.author}
+                            clicked={() => this.selectPostHandler(post.id)} />;
+            });
+        }
 
         return (
             <React.Fragment>
