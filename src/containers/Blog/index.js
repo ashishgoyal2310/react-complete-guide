@@ -30,6 +30,13 @@ class Blog extends Component {
         })
     }
 
+    createPostHandler = (data) => {
+        axios.post('https://jsonplaceholder.typicode.com/posts', data)
+            .then(response => {
+                console.log(response);
+            });
+    }
+
     render() {
         const postsListing = this.state.posts.map(post => {
             return <PostList
@@ -50,7 +57,7 @@ class Blog extends Component {
                     <PostDetail postId={this.state.selectedPostid} />
                 </section>
                 <section>
-                    <PostCreate />
+                    <PostCreate postData={this.createPostHandler} />
                 </section>
             </React.Fragment>
         );
