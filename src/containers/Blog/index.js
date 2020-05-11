@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
+import axios from '../axiosInstance'
 import PostList from '../../components/FullPost/PostList'
 import PostDetail from '../../components/FullPost/PostDetail'
 import PostCreate from '../../components/FullPost/PostCreate'
@@ -13,10 +14,8 @@ class Blog extends Component {
 
     componentDidMount() {
         const rnd = Math.random();
-        let url = 'https://jsonplaceholder.typicode.com/posts';
-        if (rnd > 0.5) { // Randomize to use wrong url to check error section
-            url = 'https://jsonplaceholder.typicode.com/postss';
-        }
+        // Randomize to use wrong url to check error section
+        let url = (rnd > 0.5) ? '/postsXXX' : '/posts';
 
         axios.get(url)
             .then(response => {
@@ -41,7 +40,7 @@ class Blog extends Component {
     }
 
     createPostHandler = (data) => {
-        axios.post('https://jsonplaceholder.typicode.com/posts', data)
+        axios.post('/posts', data)
             .then(response => {
                 console.log(response);
             });
@@ -51,7 +50,7 @@ class Blog extends Component {
         let postsListing = <p>Loading...</p>;
         if (this.state.error && !this.state.posts.length) {
             postsListing = <p>Error while loading...</p>;
-        } else {
+        } else if (!!this.state.posts.length) {
             postsListing = this.state.posts.map(post => {
                 return <PostList
                             key={post.id}
