@@ -4,6 +4,8 @@ import BuildControls from '../../components/BuildControls'
 import Modal from '../../components/UI/Modal'
 import OrderSummary from '../../components/Burger/OrderSummary'
 
+import { instanceOrder as axiosOrder } from '../axiosInstance'
+
 const INGREDIENTS_PRICE = {
     salad: 0.3,
     bacon: 0.5,
@@ -77,6 +79,30 @@ class BurgerBuilder extends Component {
         });
     }
 
+    purchaseContinueHandler = () => {
+        const data = {
+            ingredients: this.state.ingredients,
+            totalPrice: this.state.totalPrice,
+            customer: {
+                name: "Ashish Goyal",
+                email: "ashish@example.com"
+            },
+            address: {
+                street: "test street 1",
+                zipcode: "145322",
+                country: "India"
+            }
+        };
+
+        axiosOrder.post('/posts', data)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
         const btnDisables = { ...this.state.ingredients };
         for (let key in btnDisables) {
@@ -91,7 +117,8 @@ class BurgerBuilder extends Component {
                     <OrderSummary
                         ingredients={this.state.ingredients}
                         totalPrice={this.state.totalPrice.toFixed(2)}
-                        hideOrderSummary={this.hideOrderSummaryModalHandler} />
+                        hideOrderSummary={this.hideOrderSummaryModalHandler}
+                        purchaseContinue={this.purchaseContinueHandler} />
                 </Modal>
                 <Burger ingredients={ this.state.ingredients } />
                 <BuildControls

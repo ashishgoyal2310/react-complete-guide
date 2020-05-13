@@ -19,7 +19,7 @@ const OrderSummary = (props) => {
             </ul>
             <p>Continue to checkout?</p>
             <Button btnType='Danger' clicked={props.hideOrderSummary}>Cancel</Button>
-            <Button btnType='Success' clicked={() => alert('Confirm clicked')}>Confirm</Button>
+            <Button btnType='Success' clicked={props.purchaseContinue}>Confirm</Button>
         </React.Fragment>
     );
 }
