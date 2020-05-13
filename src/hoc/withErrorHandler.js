@@ -10,15 +10,19 @@ const withErorHandler = ( WrapperComponent, axios ) => {
             error: ''
         };
 
-        componentDidMount() {
+        componentWillMount() {
             axios.interceptors.request.use(req => {
+                console.log('[withErorHandler.js] componentWilMount => axios.interceptors.request', req);
                 this.setState({ error: '' })
-                return req
+                return req;
             })
             axios.interceptors.response.use(response => {
-                return response
+                console.log('[withErorHandler.js] componentWilMount => axios.interceptors.response', response);
+                return response;
             }, error => {
+                console.log('[withErorHandler.js] componentWilMount => axios.interceptors.error', error);
                 this.setState({ error: error })
+                // return error;
             })
         }
 
