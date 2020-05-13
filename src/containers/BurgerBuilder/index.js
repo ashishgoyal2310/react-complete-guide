@@ -5,6 +5,7 @@ import Modal from '../../components/UI/Modal'
 import OrderSummary from '../../components/Burger/OrderSummary'
 import Spinner from '../../components/UI/Spinner'
 
+import withErrorHandler from '../../hoc/withErrorHandler'
 import { instanceOrder as axiosOrder } from '../axiosInstance'
 
 const INGREDIENTS_PRICE = {
@@ -106,7 +107,7 @@ class BurgerBuilder extends Component {
                 console.log('error - ', error);
             })
             .then(response => {
-                this.setState( {showLoader: false} );
+                this.setState( {showLoader: false, showOrderSummaryModal: false} );
             });
     }
 
@@ -145,4 +146,4 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axiosOrder);

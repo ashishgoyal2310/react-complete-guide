@@ -9,7 +9,7 @@ const controls = [
     {label: 'tikki', type: 'tikki'},
 ];
 
-const BuildCOntrols = (props) => (
+const BuildControls = (props) => (
     <div className={classes.BuildControls}>
         <p>Current Price: <strong>{ props.totalPrice }</strong></p>
         { controls.map(ctrl =>
@@ -28,4 +28,4 @@ const BuildCOntrols = (props) => (
     </div>
 )
 
-export default BuildCOntrols;
+export default BuildControls;
