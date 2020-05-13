@@ -3,6 +3,7 @@ import Burger from '../../components/Burger'
 import BuildControls from '../../components/BuildControls'
 import Modal from '../../components/UI/Modal'
 import OrderSummary from '../../components/Burger/OrderSummary'
+import Spinner from '../../components/UI/Spinner'
 
 import { instanceOrder as axiosOrder } from '../axiosInstance'
 
@@ -23,7 +24,8 @@ class BurgerBuilder extends Component {
         },
         totalPrice: 3,
         isPurchasable: false,
-        // showOrderSummaryModal: false,
+        showOrderSummaryModal: false,
+        showLoader: false,
     }
 
     addIngredientsHandler = (type) => {
@@ -80,6 +82,8 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
+        this.setState( {showLoader: true} );
+
         const data = {
             ingredients: this.state.ingredients,
             totalPrice: this.state.totalPrice,
@@ -96,10 +100,13 @@ class BurgerBuilder extends Component {
 
         axiosOrder.post('/posts', data)
             .then(response => {
-                console.log(response);
+                console.log('success - ', response);
             })
             .catch(error => {
-                console.log(error);
+                console.log('error - ', error);
+            })
+            .then(response => {
+                this.setState( {showLoader: false} );
             });
     }
 
@@ -109,16 +116,21 @@ class BurgerBuilder extends Component {
             btnDisables[key] = btnDisables[key] <= 0
         }
 
+        let orderSummaryEle = <Spinner />
+        if (!this.state.showLoader) {
+            orderSummaryEle = <OrderSummary
+                ingredients={this.state.ingredients}
+                totalPrice={this.state.totalPrice.toFixed(2)}
+                hideOrderSummary={this.hideOrderSummaryModalHandler}
+                purchaseContinue={this.purchaseContinueHandler} />
+        }
+
         return (
             <React.Fragment>
                 <Modal
                     show={this.state.showOrderSummaryModal}
                     hideOrderSummary={this.hideOrderSummaryModalHandler}>
-                    <OrderSummary
-                        ingredients={this.state.ingredients}
-                        totalPrice={this.state.totalPrice.toFixed(2)}
-                        hideOrderSummary={this.hideOrderSummaryModalHandler}
-                        purchaseContinue={this.purchaseContinueHandler} />
+                    { orderSummaryEle }
                 </Modal>
                 <Burger ingredients={ this.state.ingredients } />
                 <BuildControls
