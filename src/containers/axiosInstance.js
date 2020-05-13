@@ -9,4 +9,8 @@ instanceBlog.defaults.headers.common['Authorization'] = 'Token Blog-Instange-Aut
 
 // instanceBlog.interceptors.request...
 
+export const instanceOrder = axios.create({
+    baseURL: 'https://jsonplaceholder.typicode.com'
+})
+
 export default instanceBlog
