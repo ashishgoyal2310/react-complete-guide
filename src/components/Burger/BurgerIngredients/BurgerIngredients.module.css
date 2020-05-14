@@ -2,7 +2,7 @@
     width: 50%;
     margin: auto;
     padding: 36px 16px;
-    background-color: rgb(209, 125, 0);
+    background-image: linear-gradient(rgba(209, 125, 0, 1), rgba(209, 125, 0, 0.6));
     border: 1px solid rgb(209, 125, 0);
     border-radius: 100px 100px 5px 5px;
 }
@@ -11,43 +11,43 @@
     width: 50%;
     margin: auto;
     padding: 16px;
-    background-color: rgb(209, 125, 0);
+    background-image: linear-gradient(rgba(209, 125, 0, 0.5), rgba(209, 125, 0, 1));
     border: 1px solid rgb(209, 125, 0);
     border-radius: 5px 5px 40px 40px;
 }
 
 .Tikki {
-    width: 55%;
+    width: 50%;
     margin: auto;
     padding: 1px;
-    background-color: rgb(96, 56, 19);
-    border: 1px solid rgb(0, 0, 0);
+    background-image: linear-gradient(rgba(96, 56, 19, 1), rgba(96, 56, 19, 0.5));
+    border: 1px solid rgba(96, 56, 19, 0.5);
     border-radius: 30px 30px 30px 30px;
 }
 
 .Cheese {
-    width: 60%;
+    width: 55%;
     margin: auto;
     padding: 1px;
-    background-color: rgb(255, 206, 0);
-    border: 1px solid rgb(0, 0, 0);
+    background-image: linear-gradient(rgba(255, 206, 0, 1), rgba(255, 206, 0, 0.5));
+    border: 1px solid rgba(255, 206, 0, 0.5);
     border-radius: 30px 30px 30px 30px;
 }
 
 .Salad {
-    width: 55%;
+    width: 50%;
     margin: auto;
     padding: 1px;
-    background-color: rgb(68, 178, 0);
-    border: 1px solid rgb(0, 0, 0);
+    background-image: linear-gradient(rgba(68, 178, 0, 1), rgba(68, 178, 0, 0.5));
+    border: 1px solid rgba(68, 178, 0, 0.5);
     border-radius: 30px 30px 30px 30px;
 }
 
 .Bacon {
-    width: 55%;
+    width: 50%;
     margin: auto;
     padding: 1px;
-    background-color: rgb(218, 46, 46);
-    border: 1px solid rgb(0, 0, 0);
+    background-image: linear-gradient(rgba(218, 46, 46, 1), rgba(218, 46, 46, 0.5));
+    border: 1px solid rgba(218, 46, 46, 0.5);
     border-radius: 3px 3px 3px 3px;
 }
