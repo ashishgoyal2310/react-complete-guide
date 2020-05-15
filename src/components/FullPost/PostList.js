@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
 import classes from './FullPost.module.css'
 
-const PostList = (props) => {
-    const postCls = [classes.Card, classes.PostCard].join(' ')
+let PostList = (props) => {
+    console.log('[PostList.js]', props);
+
+    const postCls = [classes.Card, classes.PostCard].join(' ');
     return (
         <div className={ postCls } onClick={props.clicked}>
             <p>#{ props.id } { props.title }</p>
@@ -12,20 +15,24 @@ const PostList = (props) => {
     );
 }
 
+// make embedded componenr Router Aware
+PostList = withRouter(PostList)
+
+
 const PostLists = (props) => {
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        console.log('[PostList.js] as ComponentDidMount');
+        console.log('[PostLists.js] as ComponentDidMount', props);
 
         const rnd = Math.random();
         // Randomize to use wrong url to check error section
-        let url = (rnd > 0.5) ? '/postsXXX' : '/posts';
+        let url = (rnd > 0.9) ? '/postsXXX' : '/posts';
 
         axiosBlog.get(url)
             .then(response => {
-                console.log(response);
+                console.log('[PostLists.js] response', response);
                 const posts = response.data.slice(0, 5);
                 const updatePosts = posts.map(post => {
                     return { ...post, author: 'Ashish Goyal'}

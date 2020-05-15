@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '../UI/Button';
 import classes from './FullPost.module.css';
 
-const PostDetail = (props) => {
+const PostCreate = (props) => {
     const [formData, setFormData] = useState({
                                         "title": "",
                                         "desc": "",
@@ -39,4 +39,4 @@ const PostDetail = (props) => {
     );
 }
 
-export default PostDetail;
+export default PostCreate;
