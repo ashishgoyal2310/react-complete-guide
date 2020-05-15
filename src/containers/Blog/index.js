@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router } from 'react-router-dom'
 // import axios from 'axios'
 import axios from '../axiosInstance'
 import PostList from '../../components/FullPost/PostList'
@@ -79,7 +80,7 @@ class Blog extends Component {
         return (
             <React.Fragment>
                 <BlogNavigation />
-                <section>
+                {/* <section>
                     <h3>Post Listing</h3>
                     { postsListing }
                 </section>
@@ -88,7 +89,7 @@ class Blog extends Component {
                 </section>
                 <section>
                     <PostCreate postData={this.createPostHandler} />
-                </section>
+                </section> */}
             </React.Fragment>
         );
     }
