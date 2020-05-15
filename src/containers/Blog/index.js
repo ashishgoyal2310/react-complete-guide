@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
-import { Route, Link, withRouter } from 'react-router-dom'
+import { Route, NavLink, withRouter } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../axiosInstance';
 
 import PostLists from '../../components/FullPost/PostList';
@@ -16,12 +16,17 @@ let BlogNavigation = (props) => {
         <header className={ classes.Blog }>
             <nav>
                 <ul>
-                    <li><Link to={baseUrl}>Home</Link></li>
-                    <li><Link to={{
-                        pathname: baseUrl + '/new-post',
-                        hash: '#submit',
-                        search: '?quick-search=allpost'
-                    }}>New Post</Link></li>
+                    <li><NavLink to={baseUrl}
+                                exact
+                                activeClassName={classes.active}
+                        >Home</NavLink></li>
+                    <li><NavLink to={{
+                            pathname: baseUrl + '/new-post',
+                            hash: '#submit',
+                            search: '?quick-search=allpost'
+                        }}
+                        activeClassName={classes.active}
+                        >New Post</NavLink></li>
                 </ul>
             </nav>
         </header>

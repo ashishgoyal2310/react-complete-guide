@@ -19,3 +19,8 @@
 .Blog a {
     text-decoration: none;
 }
+
+.Blog a.active {
+    background-color: #fff;
+    color: orange;
+}
