@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import classes from './FullPost.module.css'
-import Button from '../UI/Button'
-import axios from 'axios'
+import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
+import Button from '../UI/Button';
+import classes from './FullPost.module.css';
 
 const PostDetail = (props) => {
     const [postIdDetail, setPostIdDetail] = useState(null);
@@ -10,7 +10,7 @@ const PostDetail = (props) => {
         if (!postId) return;
         setPostIdDetail(null);
 
-        axios.get('https://jsonplaceholder.typicode.com/posts/' + postId)
+        axiosBlog.get('/posts/' + postId)
             .then(response => {
                 console.log(response);
                 const post = response.data;
@@ -38,7 +38,11 @@ const PostDetail = (props) => {
         }
     };
 
-    return post;
+    return (
+        <section>
+            { post }
+        </section>
+    );
 }
 
 export default PostDetail;

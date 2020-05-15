@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import classes from './FullPost.module.css'
-import Button from '../UI/Button'
+import Button from '../UI/Button';
+import classes from './FullPost.module.css';
 
 const PostDetail = (props) => {
     const [formData, setFormData] = useState({
@@ -16,25 +16,27 @@ const PostDetail = (props) => {
     }
 
     return (
-        <div className={ classes.Card }>
-            <h3>Add Post</h3>
-            <form action="" method="" className={ classes.PostCreateForm }>
-                <label>Title</label>
-                <input type="text" placeholder="Title"
-                    value={ formData.title }
-                    onChange={(event) => formDataHandler(event, 'title')} />
-                <label>Description</label>
-                <textarea cols="3" placeholder="Description"
-                    value={ formData.desc }
-                    onChange={(event) => formDataHandler(event, 'desc')}></textarea>
-                <label>Author</label>
-                <input type="text" placeholder="Author"
-                    value={ formData.author }
-                    onChange={(event) => formDataHandler(event, 'author')} />
-            </form>
-            <Button clicked={() => props.postData(formData)} >Submit</Button>
-        </div>
+        <section>
+            <div className={ classes.Card }>
+                <h3>Add Post</h3>
+                <form action="" method="" className={ classes.PostCreateForm }>
+                    <label>Title</label>
+                    <input type="text" placeholder="Title"
+                        value={ formData.title }
+                        onChange={(event) => formDataHandler(event, 'title')} />
+                    <label>Description</label>
+                    <textarea cols="3" placeholder="Description"
+                        value={ formData.desc }
+                        onChange={(event) => formDataHandler(event, 'desc')}></textarea>
+                    <label>Author</label>
+                    <input type="text" placeholder="Author"
+                        value={ formData.author }
+                        onChange={(event) => formDataHandler(event, 'author')} />
+                </form>
+                <Button clicked={() => props.postData(formData)} >Submit</Button>
+            </div>
+        </section>
     );
 }
- 
+
 export default PostDetail;
