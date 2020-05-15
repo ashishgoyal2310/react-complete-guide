@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, withRouter } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../axiosInstance';
 
 import PostLists from '../../components/FullPost/PostList';
@@ -9,14 +9,16 @@ import PostCreate from '../../components/FullPost/PostCreate';
 
 import classes from './Blog.module.css'
 
-const BlogNavigation = () => {
+let BlogNavigation = (props) => {
+    const baseUrl = props.match.url;
+
     return (
         <header className={ classes.Blog }>
             <nav>
                 <ul>
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to={baseUrl}>Home</Link></li>
                     <li><Link to={{
-                        pathname: '/new-post',
+                        pathname: baseUrl + '/new-post',
                         hash: '#submit',
                         search: '?quick-search=allpost'
                     }}>New Post</Link></li>
@@ -25,6 +27,8 @@ const BlogNavigation = () => {
         </header>
     );
 }
+BlogNavigation = withRouter(BlogNavigation);
+
 
 class Blog extends Component {
     state = {
@@ -45,14 +49,14 @@ class Blog extends Component {
     }
 
     render() {
-
+        const baseUrl = this.props.match.url;
         return (
             <React.Fragment>
                 <BlogNavigation />
-                <Route path="/" exact component={PostLists} />
+                <Route path={baseUrl} exact component={PostLists} />
                 {/* <PostLists selectPostHandler={this.selectPostHandler} /> */}
                 {/* <PostDetail postId={this.state.selectedPostid} /> */}
-                <Route path="/new-post" exact component={PostCreate} />
+                <Route path={`${baseUrl}/new-post`} component={PostCreate} />
                 {/* <PostCreate postData={this.createPostHandler} /> */}
             </React.Fragment>
         );

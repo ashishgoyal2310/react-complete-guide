@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import { BrowserRouter } from 'react-router-dom'
-// import PersonApp from '../components/Persons/Cockpit'
+import { BrowserRouter, Route } from 'react-router-dom'
+import PersonApp from '../components/Persons/Cockpit'
 import Layout from './Layout'
 import BurgerBuilder from '../containers/BurgerBuilder'
 import Blog from './Blog'
@@ -16,11 +16,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-          {/* <PersonApp /> */}
-          {/* <Layout>
-            <BurgerBuilder />
-          </Layout> */}
-          <Blog />
+          <Route path="/" exact component={() => <Layout><BurgerBuilder /></Layout>} />
+          <Route path="/person" component={PersonApp} />
+          <Route path="/blog" component={Blog} />
           {/* <Assign1 /> */}
           {/* <Assign2 /> */}
           {/* <Assign3 /> */}
