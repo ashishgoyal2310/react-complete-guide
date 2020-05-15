@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
+import { Route } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../axiosInstance';
 
 import PostLists from '../../components/FullPost/PostList';
@@ -44,9 +45,11 @@ class Blog extends Component {
         return (
             <React.Fragment>
                 <BlogNavigation />
-                <PostLists selectPostHandler={this.selectPostHandler} />
-                <PostDetail postId={this.state.selectedPostid} />
-                <PostCreate postData={this.createPostHandler} />
+                <Route path="/" exact component={PostLists} />
+                {/* <PostLists selectPostHandler={this.selectPostHandler} /> */}
+                {/* <PostDetail postId={this.state.selectedPostid} /> */}
+                <Route path="/new-post" exact component={PostCreate} />
+                {/* <PostCreate postData={this.createPostHandler} /> */}
             </React.Fragment>
         );
     }
