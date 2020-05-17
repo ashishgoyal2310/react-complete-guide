@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
-import { Route, NavLink, withRouter } from 'react-router-dom'
+import { Route, NavLink, withRouter, Switch } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../axiosInstance';
 
 import PostLists from '../../components/FullPost/PostList';
@@ -48,9 +48,11 @@ class Blog extends Component {
         return (
             <React.Fragment>
                 <BlogNavigation baseUrl={baseUrl} />
-                <Route path={baseUrl} exact component={PostLists} />
-                <Route path={`${baseUrl}/new-post`} component={PostCreate} />
-                <Route path={`${baseUrl}/:id`} component={PostDetail} />
+                <Switch>
+                    <Route path={baseUrl} exact component={PostLists} />
+                    <Route path={`${baseUrl}/new-post`} component={PostCreate} />
+                    <Route path={`${baseUrl}/:id`} component={PostDetail} />
+                </Switch>
                 {/* <PostCreate postData={this.createPostHandler} /> */}
             </React.Fragment>
         );
