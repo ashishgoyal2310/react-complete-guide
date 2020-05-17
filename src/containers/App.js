@@ -16,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-          <Route path="/" exact component={() => <Layout><BurgerBuilder /></Layout>} />
+          <Route path="/burger" exact component={() => <Layout><BurgerBuilder /></Layout>} />
           <Route path="/person" component={PersonApp} />
           <Route path="/blog" component={Blog} />
           {/* <Assign1 /> */}

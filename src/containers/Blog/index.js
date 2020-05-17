@@ -36,13 +36,6 @@ BlogNavigation = withRouter(BlogNavigation);
 class Blog extends Component {
     state = {}
 
-    createPostHandler = (data) => {
-        axiosBlog.post('/posts', data)
-            .then(response => {
-                console.log(response);
-            });
-    }
-
     render() {
         const baseUrl = this.props.match.url;
         return (
@@ -53,7 +46,6 @@ class Blog extends Component {
                     <Route path={baseUrl} component={PostLists} />
                     {/* <Route path={`${baseUrl}/:id`} component={PostDetail} /> */}
                 </Switch>
-                {/* <PostCreate postData={this.createPostHandler} /> */}
             </React.Fragment>
         );
     }
