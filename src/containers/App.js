@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { BrowserRouter, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import PersonApp from '../components/Persons/Cockpit'
 import Layout from './Layout'
 import BurgerBuilder from '../containers/BurgerBuilder'
@@ -16,13 +16,16 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-          <Route path="/burger" exact component={() => <Layout><BurgerBuilder /></Layout>} />
-          <Route path="/person" component={PersonApp} />
-          <Route path="/blog" component={Blog} />
-          <Redirect from="/" to="/burger" />
-          {/* <Assign1 /> */}
-          {/* <Assign2 /> */}
-          {/* <Assign3 /> */}
+          <Switch>
+            <Route path="/burger" exact component={() => <Layout><BurgerBuilder /></Layout>} />
+            <Route path="/person" component={PersonApp} />
+            <Route path="/blog" component={Blog} />
+            {/* <Redirect from="/" to="/burger" /> */}
+            <Route render={() => <h1>400 - Page not found.</h1>} />
+            {/* <Assign1 /> */}
+            {/* <Assign2 /> */}
+            {/* <Assign3 /> */}
+          </Switch>
       </div>
     </BrowserRouter>
   );
