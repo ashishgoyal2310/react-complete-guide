@@ -46,17 +46,21 @@ const PostLists = (props) => {
             });
     }, []);
 
+    const selectPostHandler = (postId) => {
+        props.history.push(baseUrl + '/' + postId);
+    }
+
     let postsListing = <p>Loading...</p>;
     if (error && !posts.length) {
         postsListing = <p>Error while loading...</p>;
     } else if (!!posts.length) {
         postsListing = posts.map(post => {
-            return <Link to={baseUrl + '/' + post.id} key={post.id}>
-                    <PostList
-                            id={post.id}
-                            title={post.title}
-                            author={post.author} />
-                </Link>
+            return <PostList
+                        key={post.id}
+                        id={post.id}
+                        title={post.title}
+                        author={post.author}
+                        clicked={() => selectPostHandler(post.id)} />
         });
     }
 
