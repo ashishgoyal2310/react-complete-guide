@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import PersonApp from '../components/Persons/Cockpit'
 import Layout from './Layout'
 import BurgerBuilder from '../containers/BurgerBuilder'
@@ -19,6 +19,7 @@ function App() {
           <Route path="/burger" exact component={() => <Layout><BurgerBuilder /></Layout>} />
           <Route path="/person" component={PersonApp} />
           <Route path="/blog" component={Blog} />
+          <Redirect from="/" to="/burger" />
           {/* <Assign1 /> */}
           {/* <Assign2 /> */}
           {/* <Assign3 /> */}
