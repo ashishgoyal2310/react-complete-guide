@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
 import classes from './FullPost.module.css'
 
 let PostList = (props) => {
-    console.log('[PostList.js]', props);
+    // console.log('[PostList.js]', props);
 
     const postCls = [classes.Card, classes.PostCard].join(' ');
     return (
@@ -22,6 +22,7 @@ PostList = withRouter(PostList)
 const PostLists = (props) => {
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(false);
+    const baseUrl = props.match.url;
 
     useEffect(() => {
         console.log('[PostLists.js] as ComponentDidMount', props);
@@ -32,7 +33,7 @@ const PostLists = (props) => {
 
         axiosBlog.get(url)
             .then(response => {
-                console.log('[PostLists.js] response', response);
+                // console.log('[PostLists.js] response', response);
                 const posts = response.data.slice(0, 5);
                 const updatePosts = posts.map(post => {
                     return { ...post, author: 'Ashish Goyal'}
@@ -50,12 +51,12 @@ const PostLists = (props) => {
         postsListing = <p>Error while loading...</p>;
     } else if (!!posts.length) {
         postsListing = posts.map(post => {
-            return <PostList
-                        key={post.id}
-                        id={post.id}
-                        title={post.title}
-                        author={post.author}
-                        clicked={() => props.selectPostHandler(post.id)} />;
+            return <Link to={baseUrl + '/' + post.id} key={post.id}>
+                    <PostList
+                            id={post.id}
+                            title={post.title}
+                            author={post.author} />
+                </Link>
         });
     }
 

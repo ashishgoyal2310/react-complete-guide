@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
 import Button from '../UI/Button';
 import classes from './FullPost.module.css';
+import { logRoles } from '@testing-library/react';
 
 const PostDetail = (props) => {
     const [postIdDetail, setPostIdDetail] = useState(null);
+    const propsPostId = props.match.params.id;
 
     const getPostDetail = (postId) => {
         if (!postId) return;
@@ -12,22 +14,25 @@ const PostDetail = (props) => {
 
         axiosBlog.get('/posts/' + postId)
             .then(response => {
-                console.log(response);
+                console.log('[PostDetail.js] response', response);
                 const post = response.data;
-                const updatePost = { ...post, author: 'Ashish Goyal'};
+                const updatePost = { ...post,
+                                        author: 'Ashish Goyal',
+                                        body: post.body ? post.body : 'This is some dettault text for post desc.'
+                                    };
                 setPostIdDetail(updatePost);
             });
     };
 
     useEffect(() => {
         console.log('[PostDetail.js  ] ..useEffect as componentDidUpdate');
-        getPostDetail(props.postId);
-    }, [props.postId]);
+        getPostDetail(propsPostId);
+    }, [propsPostId]);
 
-    let post = <p>Select any post to fetch details.</p>;
-    if ( props.postId ) {
+    let post = <p>Missing Required Post ID.</p>;
+    if ( propsPostId ) {
         if (!postIdDetail) {
-        post = <p>#{ props.postId } Loading...</p>;
+            post = <p>#{ propsPostId } Loading...</p>;
         } else {
             post = (<div className={ classes.Card }>
                             <h3>Post Detail</h3>
