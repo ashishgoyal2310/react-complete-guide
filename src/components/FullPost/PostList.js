@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter, Route } from 'react-router-dom'
 import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
+import PostDetail from './PostDetail'
 import classes from './FullPost.module.css'
 
 let PostList = (props) => {
@@ -20,6 +21,8 @@ PostList = withRouter(PostList)
 
 
 const PostLists = (props) => {
+    // console.log('[PostLists.js] props: ', props);
+
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(false);
     const baseUrl = props.match.url;
@@ -68,6 +71,7 @@ const PostLists = (props) => {
         <section>
             <h3>Post Listing</h3>
             { postsListing }
+            <Route path={baseUrl + "/:id"} component={PostDetail} />
         </section>
     );
 }

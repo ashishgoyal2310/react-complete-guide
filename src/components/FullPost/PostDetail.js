@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
 import Button from '../UI/Button';
 import classes from './FullPost.module.css';
-import { logRoles } from '@testing-library/react';
 
 const PostDetail = (props) => {
     const [postIdDetail, setPostIdDetail] = useState(null);
@@ -21,7 +20,8 @@ const PostDetail = (props) => {
                                         body: post.body ? post.body : 'This is some dettault text for post desc.'
                                     };
                 setPostIdDetail(updatePost);
-            });
+            })
+            .catch(error => console.log(error.message));
     };
 
     useEffect(() => {

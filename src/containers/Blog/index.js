@@ -49,9 +49,9 @@ class Blog extends Component {
             <React.Fragment>
                 <BlogNavigation baseUrl={baseUrl} />
                 <Switch>
-                    <Route path={baseUrl} exact component={PostLists} />
                     <Route path={`${baseUrl}/new-post`} component={PostCreate} />
-                    <Route path={`${baseUrl}/:id`} component={PostDetail} />
+                    <Route path={baseUrl} component={PostLists} />
+                    {/* <Route path={`${baseUrl}/:id`} component={PostDetail} /> */}
                 </Switch>
                 {/* <PostCreate postData={this.createPostHandler} /> */}
             </React.Fragment>
