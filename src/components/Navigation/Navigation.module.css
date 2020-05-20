@@ -24,16 +24,19 @@
     height: inherit;
 }
 
-.Sidedrawer nav ul {
-    list-style: none;
-    width: 100%;
+.Sidedrawer nav ul,
+.Sidedrawer nav li {
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
+    align-items: center;
+    width: 100%;
+    margin: auto;
 }
 
-.Sidedrawer nav ul li {
-    margin: 5px 0px;
+.Sidedrawer nav a {
+    width: inherit;
+    margin: 5px auto;
 }
 
 .Sidedrawer.Open {
@@ -87,33 +90,17 @@
     height: inherit;
 }
 
-.Toolbar nav, .Toolbar nav ul, .Toolbar nav ul li {
-    height: 100%;
-    box-sizing: border-box;
+.Toolbar nav, .Toolbar nav ul,
+.Toolbar nav li, .Toolbar nav a {
     display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
     align-items: center;
-}
-
-.Toolbar nav ul, .Toolbar nav ul li {
-    list-style: none;
-    padding: 0px;
-    margin: 0px 5px;
+    height: 100%;
 }
 
 @media (max-width: 500px) {
     .Toolbar nav {
         display: none;
     }
-}
-
-nav a {
-    text-decoration: none;
-    color: inherit;
-}
-nav li {
-    color: #000;
-}
-nav li:hover, nav li:active, nav li.active {
-    color: #fff;
-    background-color: rgb(60, 167, 255);
 }

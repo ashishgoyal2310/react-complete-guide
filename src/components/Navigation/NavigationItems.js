@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Navigation.module.css'
 
 const NavigationItem = (props) => (
-    <li className={props.active ? classes.active : null}><a href="{props.link}">{props.txt}</a></li>
+    <li><a href="{props.link}" className={props.active ? 'active' : null}>{props.txt}</a></li>
 );
 
 const NavigationItems = (props) => {
