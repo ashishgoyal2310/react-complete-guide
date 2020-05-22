@@ -1,34 +1,3 @@
 .Blog {
-    background-color: initial;
-}
-
-.Blog ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.Blog li {
-    display: inline-block;
-    font-size: 1.2em;
-    background-color: initial;
-}
-
-.Blog li:hover {
-    background-color: initial;
-}
-
-.Blog a {
-    display: inline-block;
-    padding: 0px 5px;
-    margin: 0px 5px;
-    text-decoration: none;
-    box-sizing: border-box;
-}
-
-.Blog a:hover,
-.Blog a:active,
-.Blog a.active {
-    background-color: olive;
-    color: orange;
+    background-color: #ddd;
 }
