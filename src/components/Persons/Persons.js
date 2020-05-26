@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Person from './Person'
-import ErrorBoundary from '../ErrorBoundary'
+import ErrorBoundary from './ErrorBoundary'
 
 class Persons extends Component {
 

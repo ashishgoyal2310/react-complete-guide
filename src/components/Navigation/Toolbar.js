@@ -4,6 +4,8 @@ import NavigationItems from './NavigationItems'
 import classes from './Navigation.module.css'
 
 const Toolbar = (props) => {
+    const baseUrlToolbar = (props.baseUrl && props.baseUrl !== '/') ? props.baseUrl : '';
+
     return (
         <div className={classes.Toolbar}>
             <div className={classes.Menu} onClick={props.toggleSidedrawer}>
@@ -13,7 +15,7 @@ const Toolbar = (props) => {
             </div>
             <div className={classes.ToolbarLogo}><LogoImage /></div>
             <nav>
-                <NavigationItems active />
+                <NavigationItems baseUrl={baseUrlToolbar} active />
             </nav>
         </div>
     );

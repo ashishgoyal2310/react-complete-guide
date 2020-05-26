@@ -3,7 +3,7 @@ import Auxiliary from '../../hoc/Auxiliary'
 import Burger from '../../components/Burger'
 import BuildControls from '../../components/BuildControls'
 import Modal from '../../components/UI/Modal'
-import OrderSummary from '../../components/Burger/OrderSummary'
+import OrderSummary from '../../components/Burger/OrderSummary.js'
 import Spinner from '../../components/UI/Spinner'
 
 import withErrorHandler from '../../hoc/withErrorHandler'
@@ -18,6 +18,7 @@ const INGREDIENTS_PRICE = {
 
 class BurgerBuilder extends Component {
     state = {
+        baseUrl: '',
         // ingredients: {
         //     salad: 0,
         //     bacon: 0,
@@ -32,6 +33,9 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
+        console.log('[BurgerBuilder.js] componentDidMount', this.props);
+        this.setState({ baseUrl: this.props.match.path });
+
         const ingredientsData = {
             salad: 0,
             bacon: 0,
@@ -104,30 +108,40 @@ class BurgerBuilder extends Component {
     purchaseContinueHandler = () => {
         this.setState( {showOrderSummaryLoader: true} );
 
-        const data = {
-            ingredients: this.state.ingredients,
-            totalPrice: this.state.totalPrice,
-            customer: {
-                name: "Ashish Goyal",
-                email: "ashish@example.com"
-            },
-            address: {
-                street: "test street 1",
-                zipcode: "145322",
-                country: "India"
-            }
-        };
+        // const data = {
+        //     ingredients: this.state.ingredients,
+        //     totalPrice: this.state.totalPrice,
+        //     customer: {
+        //         name: "Ashish Goyal",
+        //         email: "ashish@example.com"
+        //     },
+        //     address: {
+        //         street: "test street 1",
+        //         zipcode: "145322",
+        //         country: "India"
+        //     }
+        // };
 
-        axiosOrder.post('/posts', data)
-            .then(response => {
-                console.log('success - ', response);
-            })
-            .catch(error => {
-                console.log('error - ', error);
-            })
-            .then(response => {
-                this.setState( {showOrderSummaryLoader: false, showOrderSummaryModal: false} );
-            });
+        // axiosOrder.post('/posts', data)
+        //     .then(response => {
+        //         console.log('success - ', response);
+        //     })
+        //     .catch(error => {
+        //         console.log('error - ', error);
+        //     })
+        //     .then(response => {
+        //         this.setState( {showOrderSummaryLoader: false, showOrderSummaryModal: false} );
+        //     });
+        const queryParams = [];
+        for (let key in this.state.ingredients) {
+            let uri = `${key}=${this.state.ingredients[key]}`;
+            queryParams.push(encodeURI(uri));
+        }
+
+        this.props.history.push({
+            pathname: this.state.baseUrl + '/checkout',
+            search: '?' + queryParams.join('&')
+        });
     }
 
     render() {
