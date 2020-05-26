@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { BrowserRouter, Route, Redirect, Switch, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import PersonApp from '../components/Persons/Cockpit'
 import Layout from './Layout'
 import BurgerBuilder from '../containers/BurgerBuilder'
@@ -35,9 +35,12 @@ function App() {
             <Route path="/assign2" component={Assign2} />
             <Route path="/assign3" component={Assign3} />
             <Route path="/blog" component={Blog} />
-            <Route path="/burger" exact component={() => <Layout><BurgerBuilder /></Layout>} />
+
+            {/* <Route path="/burger" component={() => <Layout><BurgerBuilder /></Layout>} /> */}
+            <Route path="/burger" component={Layout} />
             {/* <Redirect from="/" to="/burger" /> */}
             {/* <Route render={() => <h1>400 - Page not found.</h1>} /> */}
+
             <Route render={() => NavigationLinks} />
           </Switch>
       </div>

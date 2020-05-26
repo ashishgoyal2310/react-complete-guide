@@ -5,6 +5,8 @@ import NavigationItems from './NavigationItems'
 import classes from './Navigation.module.css'
 
 const Sidedrawer = (props) => {
+    const baseUrlSidedrawer = (props.baseUrl && props.baseUrl !== '/') ? props.baseUrl : '';
+
     let sidedrawerCls = [classes.Sidedrawer]
     if (props.show) {
         sidedrawerCls.push(classes.Open);
@@ -18,7 +20,7 @@ const Sidedrawer = (props) => {
             <div className={sidedrawerCls.join(' ')}>
                 <div className={classes.SidedrawerLogo}><LogoImage /></div>
                 <nav>
-                    <NavigationItems active />
+                    <NavigationItems baseUrl={baseUrlSidedrawer} active />
                 </nav>
             </div>
         </React.Fragment>
