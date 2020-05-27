@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { instanceOrder as axiosOrder } from '../axiosInstance'
 import Auxiliary from '../../hoc/Auxiliary'
 import CheckoutSummary from '../../components/Burger/CheckOutSummary'
+import ContactForm from '../../components/Burger/ContactForm'
 
 const baseUrl = '/burger';
 
@@ -35,6 +36,8 @@ class Checkout extends Component {
     }
 
     makeOrderHandler = (event) => {
+        event.preventDefault();
+
         const data = {
             ingredients: this.state.ingredients,
             totalPrice: 100,
@@ -68,7 +71,9 @@ class Checkout extends Component {
                     ingredients={ this.state.ingredients }
                     cancelCheckout={ this.cancelCheckoutHandler }
                     confirmCheckout={ this.confirmCheckoutHandler } />
-                <Route path={this.state.locationPath + '/contact-data'} render={() => <button onClick={this.makeOrderHandler}>Make Order</button>} />
+                <Route
+                    path={this.state.locationPath + '/contact-data'}
+                    component={() => <ContactForm makeOrder={this.makeOrderHandler} />} />
             </Auxiliary>
         );
     }

@@ -35,6 +35,7 @@ class Layout extends Component {
                     {/* { this.props.children } */}
                     <Switch>
                         <Route path={baseUrlLayout + "/checkout"} component={Checkout} />
+                        <Route path={baseUrlLayout + "/orders"} render={() => <h1>Order list<p>Order 1</p><p>Order 2</p></h1>} />
                         <Route path={baseUrlLayout} component={BurgerBuilder} />
                     </Switch>
                 </main>
