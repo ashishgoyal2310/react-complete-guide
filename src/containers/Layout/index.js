@@ -31,7 +31,7 @@ class Layout extends Component {
                     baseUrl={baseUrlLayout}
                     show={this.state.showSidedrawer}
                     toggleSidedrawer={this.toggleSidedrawerHandler} />
-                <main>
+                <main style={{ 'marginTop': '50px' }}>
                     {/* { this.props.children } */}
                     <Switch>
                         <Route path={baseUrlLayout + "/checkout"} component={Checkout} />
