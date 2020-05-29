@@ -1,0 +1,12 @@
+.FormInput {
+    display: block;
+    width: 100%;
+    margin: 5px auto;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+.FormInput:focus {
+    background-color: #eee;
+}
