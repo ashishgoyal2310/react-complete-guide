@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 import { instanceOrder as axiosOrder } from '../axiosInstance'
 import Auxiliary from '../../hoc/Auxiliary'
+import withErrorHandler from '../../hoc/withErrorHandler'
 import CheckoutSummary from '../../components/Burger/CheckOutSummary'
 import ContactForm from '../../components/Burger/ContactForm'
 
@@ -10,7 +11,6 @@ const baseUrl = '/burger';
 
 class Checkout extends Component {
     state = {
-        baseUrl: '',
         locationPath: '',
         ingredients: {tikki: 0, bacon: 0, cheese: 0, salad: 0}
     }
@@ -55,7 +55,9 @@ class Checkout extends Component {
         axiosOrder.post('/posts', data)
             .then(response => {
                 // console.log('[checkout.js] success - ', response);
-                this.props.history.replace(baseUrl + '/orders');
+                if (response && response.data) {
+                    this.props.history.replace(baseUrl + '/orders');
+                }
             })
             .catch(error => {
                 console.log('[checkout.js] error - ', error);
@@ -65,12 +67,19 @@ class Checkout extends Component {
     }
 
     render() {
+        let checkOutSummaryEle = null;
+        if (Object.keys(this.state.ingredients).length) {
+            checkOutSummaryEle = <CheckoutSummary
+                ingredients={ this.state.ingredients }
+                cancelCheckout={ this.cancelCheckoutHandler }
+                confirmCheckout={ this.confirmCheckoutHandler } />
+        } else {
+            checkOutSummaryEle = <Redirect to={baseUrl} />
+        }
+
         return (
             <Auxiliary>
-                <CheckoutSummary
-                    ingredients={ this.state.ingredients }
-                    cancelCheckout={ this.cancelCheckoutHandler }
-                    confirmCheckout={ this.confirmCheckoutHandler } />
+                { checkOutSummaryEle }
                 <Route
                     path={this.state.locationPath + '/contact-data'}
                     component={() => <ContactForm makeOrder={this.makeOrderHandler} />} />
@@ -79,4 +88,4 @@ class Checkout extends Component {
     }
 }
 
-export default Checkout;
+export default withErrorHandler(Checkout, axiosOrder);
