@@ -44,6 +44,15 @@ class ContactForm extends Component {
         }
     }
 
+    changeInputHandler = (event, elementName) => {
+        const updatedFormElements = {...this.state.formElements};
+        const updatedElement = {...updatedFormElements[elementName]};
+
+        updatedElement.value = event.target.value;
+        updatedFormElements[elementName] = updatedElement;
+        this.setState({ formElements: updatedFormElements });
+    }
+
     render() {
         const formElementLst = []
         for (let key in this.state.formElements) {
@@ -53,7 +62,8 @@ class ContactForm extends Component {
                     key={key}
                     elementType={eleData.elementType}
                     config={eleData.elementConfig}
-                    value={eleData.value} />
+                    value={eleData.value}
+                    changed={(event) => this.changeInputHandler(event, key)} />
             );
         }
 
