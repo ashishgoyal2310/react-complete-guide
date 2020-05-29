@@ -4,7 +4,6 @@ import './App.css';
 import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import PersonApp from '../components/Persons/Cockpit'
 import Layout from './Layout'
-import BurgerBuilder from '../containers/BurgerBuilder'
 import Blog from './Blog'
 import Assign1 from '../components/Assign1'
 import Assign2 from '../components/Assign2'
@@ -36,11 +35,10 @@ function App() {
             <Route path="/assign3" component={Assign3} />
             <Route path="/blog" component={Blog} />
 
-            {/* <Route path="/burger" component={() => <Layout><BurgerBuilder /></Layout>} /> */}
             <Route path="/burger" component={Layout} />
             {/* <Redirect from="/" to="/burger" /> */}
-            {/* <Route render={() => <h1>400 - Page not found.</h1>} /> */}
 
+            {/* <Route render={() => <h1>400 - Page not found.</h1>} /> */}
             <Route render={() => NavigationLinks} />
           </Switch>
       </div>

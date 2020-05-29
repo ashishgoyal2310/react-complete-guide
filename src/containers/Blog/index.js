@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
 import { Route, NavLink, withRouter, Switch } from 'react-router-dom'
-import { instanceBlog as axiosBlog } from '../axiosInstance';
 
 import PostLists from '../../components/FullPost/PostList';
-import PostDetail from '../../components/FullPost/PostDetail';
 import PostCreate from '../../components/FullPost/PostCreate';
 
 import classes from './Blog.module.css'
