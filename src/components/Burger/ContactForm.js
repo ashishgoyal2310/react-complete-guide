@@ -12,6 +12,10 @@ class ContactForm extends Component {
                     type: "text",
                     placeholder: "Name"
                 },
+                validations: {
+                    required: true,
+                },
+                isValid: true,
                 value: ''
             },
             email: {
@@ -20,6 +24,10 @@ class ContactForm extends Component {
                     type: "email",
                     placeholder: "Email"
                 },
+                validations: {
+                    required: true,
+                },
+                isValid: true,
                 value: ''
             },
             instruction: {
@@ -28,6 +36,11 @@ class ContactForm extends Component {
                     type: "text",
                     placeholder: "Any Instruction"
                 },
+                validations: {
+                    required: false,
+                    maxLength: 150
+                },
+                isValid: true,
                 value: ''
             },
             deliveryType: {
@@ -39,9 +52,22 @@ class ContactForm extends Component {
                         {value: "cheapest", displayValue: "Cheapest"},
                     ]
                 },
+                validations: {},
+                isValid: true,
                 value: ''
             }
         }
+    }
+
+    checkIsValid(value, rules) {
+        if (!rules) return true;
+
+        let isValid = true;
+
+        if (rules.required && !value) isValid = false
+        else if (rules.maxLength && value.length > rules.maxLength) isValid = false
+
+        return isValid;
     }
 
     changeInputHandler = (event, elementName) => {
@@ -49,7 +75,9 @@ class ContactForm extends Component {
         const updatedElement = {...updatedFormElements[elementName]};
 
         updatedElement.value = event.target.value;
+        updatedElement.isValid = this.checkIsValid(updatedElement.value, updatedElement.validations);
         updatedFormElements[elementName] = updatedElement;
+
         this.setState({ formElements: updatedFormElements });
     }
 
@@ -62,6 +90,7 @@ class ContactForm extends Component {
                     key={key}
                     elementType={eleData.elementType}
                     config={eleData.elementConfig}
+                    valid={eleData.isValid}
                     value={eleData.value}
                     changed={(event) => this.changeInputHandler(event, key)} />
             );
