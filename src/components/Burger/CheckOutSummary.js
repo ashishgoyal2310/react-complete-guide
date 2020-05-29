@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Auxiliary from '../../hoc/Auxiliary'
 import Burger from '../Burger'

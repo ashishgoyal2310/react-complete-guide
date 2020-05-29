@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { instanceBlog as axiosBlog } from '../../containers/axiosInstance';
 import Button from '../UI/Button';
 import classes from './FullPost.module.css';

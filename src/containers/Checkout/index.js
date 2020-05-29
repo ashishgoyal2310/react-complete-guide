@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import { instanceOrder as axiosOrder } from '../axiosInstance'
 import Auxiliary from '../../hoc/Auxiliary'
