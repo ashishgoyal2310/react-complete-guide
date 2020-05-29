@@ -35,23 +35,14 @@ class Checkout extends Component {
         this.props.history.replace(this.state.locationPath + '/contact-data');
     }
 
-    makeOrderHandler = (event) => {
-        event.preventDefault();
-
+    makeOrderHandler = (contactFormdata) => {
         const data = {
+            ...contactFormdata,
             ingredients: this.state.ingredients,
             totalPrice: 100,
-            customer: {
-                name: "Ashish Goyal",
-                email: "ashish@example.com"
-            },
-            address: {
-                street: "test street 1",
-                zipcode: "145322",
-                country: "India"
-            }
         };
 
+        // console.log('[Checkout.js] makeOrderHandler...', data);
         axiosOrder.post('/posts', data)
             .then(response => {
                 // console.log('[checkout.js] success - ', response);
