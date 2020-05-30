@@ -11,7 +11,17 @@ const withErorHandler = ( WrapperComponent, axios ) => {
         }
 
         componentWillMount() {
-            this.requestInterceptos = axios.interceptors.request.use(req => {
+            this.registerAxiosInterceptor();
+        }
+
+        componentWillUnmount() {
+            console.log('[withErorHandler.js] componentWillUnmount ', this.requestInterceptos, this.responseInterceptor);
+            axios.interceptors.request.eject(this.requestInterceptos);
+            axios.interceptors.response.eject(this.responseInterceptor);
+        }
+
+        registerAxiosInterceptor() {
+            this.requestInterceptor = axios.interceptors.request.use(req => {
                 console.log('[withErorHandler.js] componentWilMount => axios.interceptors.request', req);
                 this.setState({ error: '' })
                 return req;
@@ -27,13 +37,8 @@ const withErorHandler = ( WrapperComponent, axios ) => {
             });
         }
 
-        componentWillUnmount() {
-            console.log('[withErorHandler.js] componentWillUnmount ', this.requestInterceptos, this.responseInterceptor);
-            axios.interceptors.request.eject(this.requestInterceptos);
-            axios.interceptors.response.eject(this.responseInterceptor);
-        }
-
         render() {
+            // console.log('[withErorHandler.js] rendering... state', this.state);
             return (
                 <Auxiliary>
                     <Modal

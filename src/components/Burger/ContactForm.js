@@ -52,7 +52,9 @@ class ContactForm extends Component {
                         {value: "cheapest", displayValue: "Cheapest"},
                     ]
                 },
-                validations: {},
+                validations: {
+                    required: true,
+                },
                 isValid: true,
                 value: ''
             }
@@ -70,15 +72,48 @@ class ContactForm extends Component {
         return isValid;
     }
 
-    changeInputHandler = (event, elementName) => {
+    updateElementData = (elementName, value) => {
         const updatedFormElements = {...this.state.formElements};
         const updatedElement = {...updatedFormElements[elementName]};
 
-        updatedElement.value = event.target.value;
-        updatedElement.isValid = this.checkIsValid(updatedElement.value, updatedElement.validations);
-        updatedFormElements[elementName] = updatedElement;
+        updatedElement.value = value;
+        updatedElement.isValid = this.checkIsValid(value, updatedElement.validations);
 
+        updatedFormElements[elementName] = updatedElement;
         this.setState({ formElements: updatedFormElements });
+    }
+
+    changeInputHandler = (event, elementName) => {
+        const value = event.target.value;
+        this.updateElementData(elementName, value)
+    }
+
+    contactFormSubmitHandler = (event) => {
+        event.preventDefault();
+        const updatedFormElements = {...this.state.formElements};
+
+        const formData = {};
+        let isFormValid = true;
+        for (let elementName in this.state.formElements) {
+            const updatedElement = {...updatedFormElements[elementName]};
+            const eleIsValid = this.checkIsValid(updatedElement.value, updatedElement.validations);
+
+            if (!eleIsValid) {
+                isFormValid = false;
+
+                updatedElement.isValid = eleIsValid;
+                updatedFormElements[elementName] = updatedElement;
+            } else {
+                formData[elementName] = updatedElement.value;
+            }
+        }
+
+        console.log('[ContactForm.js] contactFormSubmitHandler', isFormValid, formData);
+        if (isFormValid) {
+            this.props.makeOrder(formData);
+        } else {
+            this.setState({ formElements: updatedFormElements });
+        }
     }
 
     render() {
@@ -98,9 +133,10 @@ class ContactForm extends Component {
 
         return (
             <div>
-                <form className={ classes.ContactFrom }>
+                <form className={ classes.ContactFrom } onSubmit={ this.contactFormSubmitHandler }>
                     { formElementLst }
-                    <Button btnType="Success" clicked={this.props.makeOrder}>Make Order</Button>
+                    {/* <Button btnType="Success" clicked={this.props.makeOrder}>Make Order</Button> */}
+                    <Button btnType="Success" >Make Order</Button>
                 </form>
             </div>
         );
