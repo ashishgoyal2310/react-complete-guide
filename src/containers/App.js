@@ -8,6 +8,7 @@ import Blog from './Blog'
 import Assign1 from '../components/Assign1'
 import Assign2 from '../components/Assign2'
 import Assign3 from '../components/Assign3'
+import Assign4 from '../components/Assign4'
 
 function App() {
   console.log('[App.js] ...........rendering');
@@ -19,6 +20,7 @@ function App() {
           <li><NavLink to="/assign1">Assign1</NavLink></li>
           <li><NavLink to="/assign2">Assign2</NavLink></li>
           <li><NavLink to="/assign3">Assign3</NavLink></li>
+          <li><NavLink to="/assign4">Assign4</NavLink></li>
           <li><NavLink to="/blog">Blog</NavLink></li>
           <li><NavLink to="/burger">Burger</NavLink></li>
         </ul>
@@ -33,6 +35,7 @@ function App() {
             <Route path="/assign1" component={Assign1} />
             <Route path="/assign2" component={Assign2} />
             <Route path="/assign3" component={Assign3} />
+            <Route path="/assign4" component={Assign4} />
             <Route path="/blog" component={Blog} />
 
             <Route path="/burger" component={Layout} />
