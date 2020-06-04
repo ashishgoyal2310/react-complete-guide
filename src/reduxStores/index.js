@@ -1,7 +1,8 @@
 import { createStore } from 'redux'
 
 const initialState = {
-    counter: 0
+    counter: 0,
+    counterResult: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -9,13 +10,18 @@ const rootReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'INC':
-            return { counter: state.counter + action.value };
+            return { ...state, counter: state.counter + action.value };
         case 'DEC':
-            return { counter: state.counter - action.value };
+            return { ...state, counter: state.counter - action.value };
         case 'ADD':
-            return { counter: state.counter + action.value };
+            return { ...state, counter: state.counter + action.value };
         case 'SUB':
-            return { counter: state.counter - action.value };
+            return {...state, counter: state.counter - action.value };
+        case 'RESULTS':
+            return {
+                ...state,
+                counterResult: state.counterResult.concat({id: new Date, value: state.counter})
+            }
         default:
             return state
     }
