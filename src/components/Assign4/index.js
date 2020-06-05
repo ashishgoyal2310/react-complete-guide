@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import * as actionTypes from '../../reduxStores/reducers/actions'
 
 const CounterBtn = (props) => {
     return (
@@ -16,32 +17,6 @@ const CounterBtn = (props) => {
 }
 
 class Assign4Counter extends Component {
-    // state = {
-    //     counter: 0
-    // }
-
-    // counterHandler = (action) => {
-    //     let counterUpdated = 0;
-    //     switch (action) {
-    //         case 'INC':
-    //             counterUpdated = counterUpdated + 1;
-    //             break;
-    //         case 'DEC':
-    //             counterUpdated = counterUpdated - 1;
-    //             break;
-    //         case 'ADD':
-    //             counterUpdated = counterUpdated + 4;
-    //             break;
-    //         case 'SUB':
-    //             counterUpdated = counterUpdated - 4;
-    //             break;
-    //         default:
-    //             break
-    //     }
-    //     this.setState((prevState, props) => {
-    //         return { counter: prevState.counter + counterUpdated }
-    //     });
-    // }
 
     render() {
         const propsState = this.props;
@@ -71,19 +46,19 @@ class Assign4Counter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ctr: state.counter,
-        results: state.counterResult
+        ctr: state.assign4.counter,
+        results: state.assign4.counterResult
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onIncrement: () => dispatch({type: 'INC', value: 1}),
-        onDecrement: () => dispatch({type: 'DEC', value: 1}),
-        onAddition: () => dispatch({type: 'ADD', value: 4}),
-        onSubstraction: () => dispatch({type: 'SUB', value: 4}),
-        onShowResult: () => dispatch({type: 'RESULTS'}),
-        onRemoveResult: (id) => dispatch({type: 'REMOVE_RESULT', resultId: id}),
+        onIncrement: () => dispatch({type: actionTypes.INCREMENT, value: 1}),
+        onDecrement: () => dispatch({type: actionTypes.DECREMENT, value: 1}),
+        onAddition: () => dispatch({type: actionTypes.ADDITION, value: 4}),
+        onSubstraction: () => dispatch({type: actionTypes.SUBSTRACTION, value: 4}),
+        onShowResult: () => dispatch({type: actionTypes.SHOW_RESULTS}),
+        onRemoveResult: (id) => dispatch({type: actionTypes.REMOVE_RESULT, resultId: id}),
     }
 }
 
