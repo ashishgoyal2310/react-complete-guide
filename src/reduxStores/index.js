@@ -1,8 +1,9 @@
 import { createStore, combineReducers } from 'redux'
-import assign4Reducer from './reducers/assign4Reducer'
+import { counterReducer, resultReducer } from './reducers/assign4Reducer'
 
 const rootReducer = combineReducers({
-    assign4: assign4Reducer
+    assign4Counter: counterReducer,
+    assign4Result: resultReducer,
 })
 
 const store = createStore(rootReducer);

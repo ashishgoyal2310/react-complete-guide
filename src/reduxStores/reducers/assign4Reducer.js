@@ -1,12 +1,11 @@
 import * as actionTypes from './actions';
 
-const initialState = {
+const initialCounterState = {
     counter: 0,
-    counterResult: [],
 }
 
-const reducer = (state = initialState, action) => {
-    console.log('[assign4Reducer.js] reducer', state, action);
+export const counterReducer = (state = initialCounterState, action) => {
+    console.log('[assign4Reducer.js] counterReducer', state, action);
 
     switch (action.type) {
         case actionTypes.INCREMENT:
@@ -17,10 +16,23 @@ const reducer = (state = initialState, action) => {
             return { ...state, counter: state.counter + action.value };
         case actionTypes.SUBSTRACTION:
             return {...state, counter: state.counter - action.value };
+        default:
+            return state
+    }
+}
+
+const initialResultState = {
+    counterResult: []
+}
+
+export const resultReducer = (state = initialResultState, action) => {
+    console.log('[assign4Reducer.js] counterReducer', state, action);
+
+    switch (action.type) {
         case actionTypes.SHOW_RESULTS:
             return {
                 ...state,
-                counterResult: state.counterResult.concat({id: new Date().getTime(), value: state.counter})
+                counterResult: state.counterResult.concat({id: new Date().getTime(), value: action.ctrValue})
             }
         case actionTypes.REMOVE_RESULT:
             const updatedResults = state.counterResult.filter((resultDct, index) => (
@@ -33,5 +45,3 @@ const reducer = (state = initialState, action) => {
             return state
     }
 }
-
-export default reducer

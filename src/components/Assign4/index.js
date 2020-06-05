@@ -23,12 +23,12 @@ class Assign4Counter extends Component {
 
         return (
             <div>
-                <h1 style={{'backgroundColor': 'salmon'}}>Current Counter: {propsState.ctr}</h1>
+                <h1 style={{'backgroundColor': 'salmon'}}>Current Counter: {propsState.counter}</h1>
                 <CounterBtn clicked={propsState.onIncrement} name='INC' />
                 <CounterBtn clicked={propsState.onDecrement} name='DEC' />
                 <CounterBtn clicked={propsState.onAddition} name='ADD 4' />
                 <CounterBtn clicked={propsState.onSubstraction} name='SUB 4' />
-                <CounterBtn clicked={propsState.onShowResult} name='RESULTS' />
+                <CounterBtn clicked={() => propsState.onShowResult(propsState.counter)} name='RESULTS' />
                 <ul>
                     { propsState.results.map((resultDct) => (
                         <li key={ resultDct.id }
@@ -46,8 +46,8 @@ class Assign4Counter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ctr: state.assign4.counter,
-        results: state.assign4.counterResult
+        counter: state.assign4Counter.counter,
+        results: state.assign4Result.counterResult
     }
 }
 
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
         onDecrement: () => dispatch({type: actionTypes.DECREMENT, value: 1}),
         onAddition: () => dispatch({type: actionTypes.ADDITION, value: 4}),
         onSubstraction: () => dispatch({type: actionTypes.SUBSTRACTION, value: 4}),
-        onShowResult: () => dispatch({type: actionTypes.SHOW_RESULTS}),
+        onShowResult: (ctr) => dispatch({type: actionTypes.SHOW_RESULTS, ctrValue: ctr}),
         onRemoveResult: (id) => dispatch({type: actionTypes.REMOVE_RESULT, resultId: id}),
     }
 }
