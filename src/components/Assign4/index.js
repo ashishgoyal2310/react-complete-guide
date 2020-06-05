@@ -53,6 +53,17 @@ class Assign4Counter extends Component {
                 <CounterBtn clicked={propsState.onDecrement} name='DEC' />
                 <CounterBtn clicked={propsState.onAddition} name='ADD 4' />
                 <CounterBtn clicked={propsState.onSubstraction} name='SUB 4' />
+                <CounterBtn clicked={propsState.onShowResult} name='RESULTS' />
+                <ul>
+                    { propsState.results.map((resultDct) => (
+                        <li key={ resultDct.id }
+                            title='Click Me'
+                            style={{'backgroundColor': '#ee9d44', 'cursor': 'pointer', 'width': '50%', 'margin': '3px auto'}}
+                            onClick={() => propsState.onRemoveResult(resultDct.id)}>
+                            { resultDct.value }
+                        </li>
+                    )) }
+                </ul>
             </div>
         );
     }
@@ -60,7 +71,8 @@ class Assign4Counter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ctr: state.counter
+        ctr: state.counter,
+        results: state.counterResult
     }
 }
 
@@ -70,6 +82,8 @@ const mapDispatchToProps = (dispatch) => {
         onDecrement: () => dispatch({type: 'DEC', value: 1}),
         onAddition: () => dispatch({type: 'ADD', value: 4}),
         onSubstraction: () => dispatch({type: 'SUB', value: 4}),
+        onShowResult: () => dispatch({type: 'RESULTS'}),
+        onRemoveResult: (id) => dispatch({type: 'REMOVE_RESULT', resultId: id}),
     }
 }
 
