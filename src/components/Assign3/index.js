@@ -39,7 +39,10 @@ const Assign3 = () => {
         <div>
             <h1>Assignment3</h1>
             <ol>
-                <li>Create Component to toggle backgroundColor on click.</li>
+                <li>Create Component display small boxes (7 X 6 Matrix).</li>
+                <li>AllowAdd click handler to toggle backgroundColor on box click.</li>
+                <li>Create Button of Alphabet (i.e A, S, H, I, S, H).</li>
+                <li>On click of Alphabet button fill the box to draw the Alphabet.</li>
             </ol>
 
             <table>

@@ -26,7 +26,7 @@ const initialResultState = {
 }
 
 export const resultReducer = (state = initialResultState, action) => {
-    console.log('[assign4Reducer.js] counterReducer', state, action);
+    console.log('[assign4Reducer.js] resultReducer', state, action);
 
     switch (action.type) {
         case actionTypes.SHOW_RESULTS:
