@@ -14,9 +14,21 @@ const burgerBuilderReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
-            return {};
+            return {
+                ...state,
+                ingredients: {
+                    ...state.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+                }
+            };
         case actionTypes.REMOVE_INGREDIENT:
-            return {};
+            return {
+                ...state,
+                ingredients: {
+                    ...state.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
+                }
+            };
         default:
             return state;
     }
