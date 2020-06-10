@@ -3,6 +3,7 @@ import './App.css';
 
 import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import PersonApp from '../components/Persons/Cockpit'
+import Card from '../components/UI/Card'
 import Layout from './Layout'
 import Blog from './Blog'
 import Assign1 from '../components/Assign1'
@@ -15,15 +16,13 @@ function App() {
 
   const NavigationLinks = (
       <nav>
-        <ul>
-          <li><NavLink to="/person">Person</NavLink></li>
-          <li><NavLink to="/assign1">Assign1</NavLink></li>
-          <li><NavLink to="/assign2">Assign2</NavLink></li>
-          <li><NavLink to="/assign3">Assign3</NavLink></li>
-          <li><NavLink to="/assign4">Assign4</NavLink></li>
-          <li><NavLink to="/blog">Blog</NavLink></li>
-          <li><NavLink to="/burger">Burger</NavLink></li>
-        </ul>
+          <Card><NavLink to="/person">Person</NavLink></Card>
+          <Card><NavLink to="/assign1">Assign1</NavLink></Card>
+          <Card><NavLink to="/assign2">Assign2</NavLink></Card>
+          <Card><NavLink to="/assign3">Assign3</NavLink></Card>
+          <Card><NavLink to="/assign4">Assign4</NavLink></Card>
+          <Card><NavLink to="/blog">Blog</NavLink></Card>
+          <Card><NavLink to="/burger">Burger</NavLink></Card>
       </nav>
   )
 
