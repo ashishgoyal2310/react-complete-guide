@@ -55,38 +55,38 @@ class BurgerBuilder extends Component {
         //     .catch(error => { console.log('error - ', error); });
     }
 
-    addIngredientsHandler = (type) => {
-        const currentCount = this.state.ingredients[type];
-        const updatedIngredients = { ...this.state.ingredients };
-        updatedIngredients[type] = currentCount + 1;
+    // addIngredientsHandler = (type) => {
+    //     const currentCount = this.state.ingredients[type];
+    //     const updatedIngredients = { ...this.state.ingredients };
+    //     updatedIngredients[type] = currentCount + 1;
 
-        const currentTotalPrice = this.state.totalPrice;
-        const ingredientCost = INGREDIENTS_PRICE[type];
-        const updatedTotalPrice = currentTotalPrice + ingredientCost;
+    //     const currentTotalPrice = this.state.totalPrice;
+    //     const ingredientCost = INGREDIENTS_PRICE[type];
+    //     const updatedTotalPrice = currentTotalPrice + ingredientCost;
 
-        this.setState({ingredients: updatedIngredients, totalPrice: updatedTotalPrice});
-        this.isPurchasableHandler();
-    }
+    //     this.setState({ingredients: updatedIngredients, totalPrice: updatedTotalPrice});
+    //     this.isPurchasableHandler();
+    // }
 
-    removeIngredientsHandler = (type) => {
-        const currentCount = this.state.ingredients[type];
-        if (currentCount <= 0) {
-            return;
-        }
-        const updatedIngredients = { ...this.state.ingredients };
-        updatedIngredients[type] = currentCount - 1;
+    // removeIngredientsHandler = (type) => {
+    //     const currentCount = this.state.ingredients[type];
+    //     if (currentCount <= 0) {
+    //         return;
+    //     }
+    //     const updatedIngredients = { ...this.state.ingredients };
+    //     updatedIngredients[type] = currentCount - 1;
 
-        const currentTotalPrice = this.state.totalPrice;
-        const ingredientCost = INGREDIENTS_PRICE[type];
-        const updatedTotalPrice = currentTotalPrice - ingredientCost;
+    //     const currentTotalPrice = this.state.totalPrice;
+    //     const ingredientCost = INGREDIENTS_PRICE[type];
+    //     const updatedTotalPrice = currentTotalPrice - ingredientCost;
 
-        this.setState({ingredients: updatedIngredients, totalPrice: updatedTotalPrice});
-        this.isPurchasableHandler();
-    }
+    //     this.setState({ingredients: updatedIngredients, totalPrice: updatedTotalPrice});
+    //     this.isPurchasableHandler();
+    // }
 
     isPurchasableHandler = () => {
         this.setState((prevState, props) => {
-            const updatedIngredients = { ...prevState.ingredients };
+            const updatedIngredients = { ...this.props.ingredients };
             const sum = Object.keys(updatedIngredients)
                 .map( igKey => updatedIngredients[igKey])
                 .reduce( (updatedCnt, nxtEle) => {
@@ -139,8 +139,8 @@ class BurgerBuilder extends Component {
                     <BuildControls
                         btnDisables={btnDisables}
                         totalPrice={this.state.totalPrice.toFixed(2)}
-                        addIngredients={this.addIngredientsHandler}
-                        removeIngredients={this.removeIngredientsHandler}
+                        addIngredients={ propsState.onAddIngredientsHandler }
+                        removeIngredients={ propsState.onRemoveIngredientsHandler }
                         showOrderSummary={this.showOrderSummaryModalHandler}
                         isPurchasable={this.state.isPurchasable} />
                 </Auxiliary>
@@ -177,8 +177,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onIngredientAdded: (ingName) => dispatch({action: actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
-        onIngredientRemoved: (ingName) => dispatch({action: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName}),
+        onAddIngredientsHandler: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
+        onRemoveIngredientsHandler: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName}),
     }
 }
 
