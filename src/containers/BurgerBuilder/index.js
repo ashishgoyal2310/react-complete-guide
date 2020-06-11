@@ -16,13 +16,6 @@ import * as actionTypes from '../../reduxStores/reducers/actions'
 class BurgerBuilder extends Component {
     state = {
         baseUrl: '',
-        // ingredients: {
-        //     salad: 0,
-        //     bacon: 0,
-        //     cheese: 0,
-        //     tikki: 0
-        // },
-        // ingredients: null,
         totalPrice: 3,
         isPurchasable: false,
         showOrderSummaryModal: false,
@@ -49,24 +42,14 @@ class BurgerBuilder extends Component {
         //     .catch(error => { console.log('error - ', error); });
     }
 
-    // addIngredientsHandler = (type) => {
-    //     this.isPurchasableHandler();
-    // }
-
-    // removeIngredientsHandler = (type) => {
-    //     this.isPurchasableHandler();
-    // }
-
     isPurchasableHandler = () => {
-        this.setState((prevState, props) => {
-            const updatedIngredients = { ...this.props.ingredients };
-            const sum = Object.keys(updatedIngredients)
-                .map( igKey => updatedIngredients[igKey])
-                .reduce( (updatedCnt, nxtEle) => {
-                    return updatedCnt + nxtEle
-                }, 0)
-            return { isPurchasable: sum > 0 };
-        });
+        const updatedIngredients = { ...this.props.ingredients };
+        const sum = Object.keys(updatedIngredients)
+            .map( igKey => updatedIngredients[igKey])
+            .reduce( (updatedCnt, nxtEle) => {
+                return updatedCnt + nxtEle
+            }, 0)
+        return sum > 0;
     }
 
     showOrderSummaryModalHandler = () => {
@@ -115,7 +98,7 @@ class BurgerBuilder extends Component {
                         addIngredients={ propsState.onAddIngredientsHandler }
                         removeIngredients={ propsState.onRemoveIngredientsHandler }
                         showOrderSummary={this.showOrderSummaryModalHandler}
-                        isPurchasable={this.state.isPurchasable} />
+                        isPurchasable={this.isPurchasableHandler()} />
                 </Auxiliary>
             );
 
