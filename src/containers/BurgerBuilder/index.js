@@ -24,7 +24,7 @@ class BurgerBuilder extends Component {
 
     componentDidMount() {
         console.log('[BurgerBuilder.js] componentDidMount', this.props);
-        // this.setState({ baseUrl: this.props.match.path });
+        this.setState({ baseUrl: this.props.match.path });
 
         // const ingredientsData = {
         //     salad: 0,
@@ -66,16 +66,8 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         this.setState( {showOrderSummaryLoader: true} );
-
-        const queryParams = [];
-        for (let key in this.state.ingredients) {
-            let uri = `${key}=${this.state.ingredients[key]}`;
-            queryParams.push(encodeURI(uri));
-        }
-
         this.props.history.push({
-            pathname: this.state.baseUrl + '/checkout',
-            search: '?' + queryParams.join('&')
+            pathname: this.state.baseUrl + '/checkout'
         });
     }
 

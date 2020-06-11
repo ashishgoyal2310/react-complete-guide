@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 import { instanceOrder as axiosOrder } from '../axiosInstance'
 import Auxiliary from '../../hoc/Auxiliary'
@@ -12,19 +13,11 @@ const baseUrl = '/burger';
 class Checkout extends Component {
     state = {
         locationPath: '',
-        ingredients: {tikki: 0, bacon: 0, cheese: 0, salad: 0}
     }
 
     componentDidMount() {
         console.log('[Checkout.js] componentDidMount', this.props);
-
-        const urlParams = new URLSearchParams(this.props.location.search);
-        const ingredients = {};
-        for (let pair of urlParams.entries()) {
-            // ['salad', 1]
-            ingredients[pair[0]] = +pair[1];
-        }
-        this.setState({ locationPath: this.props.match.path, ingredients: ingredients });
+        this.setState({ locationPath: this.props.match.path });
     }
 
     cancelCheckoutHandler = () => {
@@ -36,10 +29,11 @@ class Checkout extends Component {
     }
 
     makeOrderHandler = (contactFormdata) => {
+        const propsState = this.props;
         const data = {
             ...contactFormdata,
-            ingredients: this.state.ingredients,
-            totalPrice: 100,
+            ingredients: propsState.ingredients,
+            totalPrice: propsState.totalPrice,
         };
 
         // console.log('[Checkout.js] makeOrderHandler...', data);
@@ -58,10 +52,11 @@ class Checkout extends Component {
     }
 
     render() {
+        const propsState = this.props;
         let checkOutSummaryEle = null;
-        if (Object.keys(this.state.ingredients).length) {
+        if (Object.keys(propsState.ingredients).length) {
             checkOutSummaryEle = <CheckoutSummary
-                ingredients={ this.state.ingredients }
+                ingredients={ propsState.ingredients }
                 cancelCheckout={ this.cancelCheckoutHandler }
                 confirmCheckout={ this.confirmCheckoutHandler } />
         } else {
@@ -79,4 +74,13 @@ class Checkout extends Component {
     }
 }
 
-export default withErrorHandler(Checkout, axiosOrder);
+const mapStateToProps = (state) => {
+    return {
+        ingredients: state.burgerBuilder.ingredients,
+        totalPrice: state.burgerBuilder.totalPrice
+    }
+}
+
+const connection = connect(mapStateToProps, null);
+
+export default connection(withErrorHandler(Checkout, axiosOrder));
